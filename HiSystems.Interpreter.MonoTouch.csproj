@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7F045FA-2E47-40EE-9501-B407C52D9D19}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HiSystems.Interpreter</RootNamespace>
+    <AssemblyName>CalculationEngine.MonoTouch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Functions\Average.cs" />
+    <Compile Include="Functions\Function.cs" />
+    <Compile Include="Functions\Sum.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Library\PeekableEnumerator.cs" />
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\Token.cs" />
+    <Compile Include="Engine\Tokenizer.cs" />
+    <Compile Include="Operators\Operator.cs" />
+    <Compile Include="Operators\AddOperator.cs" />
+    <Compile Include="Operators\AndOperator.cs" />
+    <Compile Include="Operators\DivideOperator.cs" />
+    <Compile Include="Operators\GreaterThanOperator.cs" />
+    <Compile Include="Operators\GreaterThanOrEqualToOperator.cs" />
+    <Compile Include="Operators\LessThanOperator.cs" />
+    <Compile Include="Operators\LessThanOrEqualToOperator.cs" />
+    <Compile Include="Operators\MultiplyOperator.cs" />
+    <Compile Include="Operators\OrOperator.cs" />
+    <Compile Include="Operators\SubtractOperator.cs" />
+    <Compile Include="Literals\Boolean.cs" />
+    <Compile Include="Literals\Number.cs" />
+    <Compile Include="Literals\Literal.cs" />
+    <Compile Include="Literals\Array.cs" />
+    <Compile Include="Constructs\IConstruct.cs" />
+    <Compile Include="Constructs\Variable.cs" />
+    <Compile Include="Constructs\FunctionOperation.cs" />
+    <Compile Include="Constructs\Operation.cs" />
+    <Compile Include="Functions\If.cs" />
+    <Compile Include="Engine\Expression.cs" />
+    <Compile Include="Operators\EqualToOperator.cs" />
+    <Compile Include="Operators\NotEqualToOperator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Engine\" />
+    <Folder Include="Library\" />
+    <Folder Include="Literals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
+  </ItemGroup>
+</Project>
