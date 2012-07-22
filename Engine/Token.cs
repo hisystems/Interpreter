@@ -20,7 +20,7 @@ namespace HiSystems.Interpreter
         Number,
 
         /// <summary>
-        /// Function or variable name
+        /// Function variable name or reserved word
         /// </summary>
         Identifier,
 
@@ -38,16 +38,6 @@ namespace HiSystems.Interpreter
 		/// ',' character.
 		/// </summary>
 		Comma,
-
-		/// <summary>
-		/// 'true' constant
-		/// </summary>
-		True,
-
-		/// <summary>
-		/// 'false' constant
-		/// </summary>
-		False,
 
 		/// <summary>
 		/// Any other token that is not one of the other token types specified in this enum.
