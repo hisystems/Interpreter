@@ -32,7 +32,7 @@ namespace HiSystems.Interpreter
 	/// Limitations:
 	///   Does not support string manipulation functions - although this could be easily intergrated.
 	/// </summary>
-    public static class Engine
+    public class Engine
     {
         private class OperatorAndPrecedence
         {
@@ -161,7 +161,7 @@ namespace HiSystems.Interpreter
         /// <summary>
         /// </summary>
         private static int parenthesisPrecendence;
-        private static List<Function> allFunctions = new List<Function>();
+        private List<Function> allFunctions = new List<Function>();
 		
         static Engine() 
         {
@@ -169,17 +169,23 @@ namespace HiSystems.Interpreter
             parenthesisPrecendence = allOperators
                 .Select(item => item.Precedence)
                 .Max() + 1;
+        }
 
-			Register(new Sum());
-			Register(new Average());
-			Register(new If());
+        /// <summary>
+        /// Creates a new engine that can be used to parse expressions.
+        /// </summary>
+        public Engine()
+        {
+            Register(new Sum());
+            Register(new Average());
+            Register(new If());
         }
 
 		/// <summary>
 		/// Registers the function, so that the function can be utilised by the engine.
 		/// Must be called before Engine.Parse() otherwise the function will not be recognised.
 		/// </summary>
-		public static void Register(Function function)
+		public void Register(Function function)
 		{
 			allFunctions.Add(function);
 		}
@@ -188,7 +194,7 @@ namespace HiSystems.Interpreter
 		/// Parses the expression and prepares it for execution.
 		/// The returned Expression can then be populated with variables if necessary
 		/// and then executed via Expression.Execute().
-        public static Expression Parse(string expression)
+        public Expression Parse(string expression)
 		{
 			return new Expression(ParseToConstruct(expression));
 		}
@@ -196,7 +202,7 @@ namespace HiSystems.Interpreter
 		/// <summary>
 		/// Parses the expression and prepares it for execution.
 		/// </summary>
-        private static IConstruct ParseToConstruct(string expression)
+        private IConstruct ParseToConstruct(string expression)
         {
 			return GetConstructFromTokens(Tokenizer.Parse(expression));
         }
@@ -205,7 +211,7 @@ namespace HiSystems.Interpreter
 		/// Creates the construct from a set of tokens.
 		/// This is used to parse an entire expression and also an expression from a function's argument.
 		/// </summary>
-		private static IConstruct GetConstructFromTokens(List<Token> tokens)
+		private IConstruct GetConstructFromTokens(List<Token> tokens)
 		{
             var variablesList = new List<Variable>();
 
@@ -238,7 +244,7 @@ namespace HiSystems.Interpreter
         /// <summary>
         /// Translates the tokens into meaningful functions, operations and values.
         /// </summary>
-        private static List<TranslatedToken> TranslateTokens(List<Token> tokens, List<Variable> currentVariables)
+        private List<TranslatedToken> TranslateTokens(List<Token> tokens, List<Variable> currentVariables)
         {
             var translatedTokens = new List<TranslatedToken>();
             var tokensEnum = new PeekableEnumerator<Token>(tokens);
@@ -461,7 +467,7 @@ namespace HiSystems.Interpreter
 		/// <remarks>
 		/// NOTE: Currently, expressions as arguments is not supported. i.e. SUM(1 + 2, 3) will not work.
 		/// </remarks>
-        private static IConstruct[] GetFunctionArguments(PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
+        private IConstruct[] GetFunctionArguments(PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
         {
             var arguments = new List<IConstruct>();
             var functionName = tokensEnum.Current.Value;
@@ -528,7 +534,7 @@ namespace HiSystems.Interpreter
         /// Translates an identifier as either a function, variable name or key word.
         /// A function will match a registered function name and have a left parenthesis token following it, otherwise it is a variable.
         /// </summary>
-        private static IConstruct TranslateIdentifierToken (PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
+        private IConstruct TranslateIdentifierToken (PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
 		{
 			var identifierToken = tokensEnum.Current;
 
