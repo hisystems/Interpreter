@@ -74,17 +74,6 @@ namespace HiSystems.Interpreter
 
 			return transformedArray.Cast<T>().ToArray();
 		}
-
-		/// <summary>
-		/// Returns the Variable type argument.
-		/// Throws an error if the construct is not a variable.
-		/// </summary>
-		protected Variable GetVariable(IConstruct[] arguments, int argumentIndex)
-		{
-			var argument = GetArgument(arguments, argumentIndex);
-
-			return CastArgumentToType<Variable>(argument, argumentIndex);
-		}
 		
         /// <summary>
 		/// Gets the argument and transforms/executes it and returns it as of type T.
