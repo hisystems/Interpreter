@@ -34,6 +34,11 @@ namespace HiSystems.Interpreter
 			return number.value;
 		}
 		
+        public static implicit operator double(Number number)
+        {
+            return (double)number.value;
+        }
+
 		public static implicit operator Number(decimal value)
 		{
 			return new Number(value);

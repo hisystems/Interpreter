@@ -68,6 +68,8 @@
     <Compile Include="Engine\Expression.cs" />
     <Compile Include="Operators\EqualToOperator.cs" />
     <Compile Include="Operators\NotEqualToOperator.cs" />
+    <Compile Include="Literals\DateTime.cs" />
+    <Compile Include="Functions\Today.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />
