@@ -19,7 +19,7 @@ namespace HiSystems.Interpreter
     public class Variable : IConstruct
     {
         private string name;
-        private Literal literal;
+        private IConstruct construct;
 		
         /// <summary>
         /// </summary>
@@ -30,13 +30,13 @@ namespace HiSystems.Interpreter
 
         /// <summary>
         /// </summary>
-        public Variable(string name, Literal value)
+        public Variable(string name, IConstruct value)
         {
             if (String.IsNullOrEmpty(name))
                 throw new ArgumentNullException("Name");
 
             this.name = name;
-            this.literal = value;
+            this.construct = value;
         }
 
         public string Name
@@ -51,17 +51,11 @@ namespace HiSystems.Interpreter
         /// The associated literal value that should be associated with this variable.
         /// This value should be set before the IConstruct.Transform() function is called.
         /// </summary>
-		/// <remarks>
-		/// Originally considered making this of type IConstruct so that a variable could be 
-		/// set to a function or operation. However, at this stage there would be no advantage to doing so
-		/// because the variable is set explicitly in code and therefore there is no advantage to passing
-		/// it as function or operation expression.
-		/// </remarks>
-        public Literal Value
+        public IConstruct Value
         {
             get
             {
-                return this.literal;
+                return this.construct;
             }
 
             set
@@ -69,21 +63,21 @@ namespace HiSystems.Interpreter
                 if (value == null)
                     throw new ArgumentNullException();
 
-            	this.literal = value;
+            	this.construct = value;
             }
         }
 		
 		Literal IConstruct.Transform()
 		{
-			if (this.literal == null)
+			if (this.construct == null)
 				throw new InvalidOperationException(String.Format("Variable {0} has not been set", this.name));
 
-			return this.literal;
+			return this.construct.Transform();
 		}
 
         public override string ToString()
         {
-			return this.name + ": " + this.literal.ToString();
+			return this.name + ": " + this.construct.ToString();
         }
     }
 }

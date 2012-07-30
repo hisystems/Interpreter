@@ -15,7 +15,7 @@ namespace HiSystems.Interpreter
     /// <summary>
     /// Contains a parsed expression tree object and variables defined in the expression.
     /// </summary>
-    public class Expression 
+    public class Expression : IConstruct
     {
         private IConstruct construct;
 		private IDictionary<string, Variable> variables;
@@ -94,5 +94,10 @@ namespace HiSystems.Interpreter
 
 			return variables.ToArray();
 		}
+
+        Literal IConstruct.Transform()
+        {
+            return construct.Transform();
+        }
     }
 }
