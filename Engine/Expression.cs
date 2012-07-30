@@ -26,12 +26,13 @@ namespace HiSystems.Interpreter
 		/// <param name='value'>
 		/// Root construct in the expression tree. Calling IConstruct.Transform will return the actual value.
 		/// </param>
-        internal Expression(IConstruct value)
+        internal Expression(IConstruct value, List<Variable> variables)
         {
 			if (value == null)
 				throw new ArgumentNullException();
 
 			this.construct = value;
+            this.variables = TranslateVariabelsToDictionary(variables);
         }
 
 		/// <summary>
@@ -54,46 +55,16 @@ namespace HiSystems.Interpreter
 		{
 			get 
 			{
-				if (this.variables == null)
-					this.variables = GetVariables(this.construct);
-
 				return this.variables;
 			}
 		}
 		
         /// Returns a distinct list of variables from the expression.
         /// </summary>
-        private static IDictionary<string, Variable> GetVariables(IConstruct rootConstruct)
+        private static IDictionary<string, Variable> TranslateVariabelsToDictionary(List<Variable> variables)
         {
-            return GetVariablesList(rootConstruct)
-                .ToDictionary(variable => variable.Name, variable => variable);
+            return variables.ToDictionary(variable => variable.Name, variable => variable);
         }
-
-        /// <summary>
-        /// Returns a distinct list of variables from the expression.
-        /// </summary>
-        private static Variable[] GetVariablesList(IConstruct construct)
-        {
-            var variables = new List<Variable>();
-
-            if (construct is Operation)
-            {
-                var operation = (Operation)construct;
-                variables.AddRange(GetVariablesList(operation.LeftValue));
-                variables.AddRange(GetVariablesList(operation.RightValue));
-            }
-            else if (construct is Variable)
-            {
-                variables.Add((Variable)construct);
-            }
-            else if (construct is FunctionOperation)
-            {
-                foreach (var functionArgument in ((FunctionOperation)construct).Arguments)
-                	variables.AddRange(GetVariablesList(functionArgument));
-            }
-
-			return variables.ToArray();
-		}
 
         Literal IConstruct.Transform()
         {

@@ -196,28 +196,28 @@ namespace HiSystems.Interpreter
 		/// and then executed via Expression.Execute().
         public Expression Parse(string expression)
 		{
-			return new Expression(ParseToConstruct(expression));
+            var variablesList = new List<Variable>();
+            
+			return new Expression(ParseToConstruct(expression, variablesList), variablesList);
 		}
 
 		/// <summary>
 		/// Parses the expression and prepares it for execution.
 		/// </summary>
-        private IConstruct ParseToConstruct(string expression)
+        private IConstruct ParseToConstruct(string expression, List<Variable> currentVariables)
         {
-			return GetConstructFromTokens(Tokenizer.Parse(expression));
+			return GetConstructFromTokens(Tokenizer.Parse(expression), currentVariables);
         }
 
 		/// <summary>
 		/// Creates the construct from a set of tokens.
 		/// This is used to parse an entire expression and also an expression from a function's argument.
 		/// </summary>
-		private IConstruct GetConstructFromTokens(List<Token> tokens)
+		private IConstruct GetConstructFromTokens(List<Token> tokens, List<Variable> currentVariables)
 		{
-            var variablesList = new List<Variable>();
-
             // Translate the tokens to meaningful tokens such as a variables, functions and operators
             // Unknown or unexpected tokens will cause an exception to be thrown
-            var translatedTokens = TranslateTokens(tokens, variablesList);
+            var translatedTokens = TranslateTokens(tokens, currentVariables);
 
             // If there is only one item in the expression (i.e. a function or number and no operations)
             if (translatedTokens.Count == 1)
@@ -482,7 +482,7 @@ namespace HiSystems.Interpreter
 
                 while (!reachedEndOfArguments)
                 {
-					arguments.Add(GetConstructFromTokens(GetFunctionArgumentTokens(functionName, tokensEnum, currentVariables)));
+					arguments.Add(GetConstructFromTokens(GetFunctionArgumentTokens(functionName, tokensEnum, currentVariables), currentVariables));
 
 					// tokensEnum.Current will be the last token processed by GetFunctionArgumentTokens()
 					if (tokensEnum.Current.Type == TokenType.RightParenthesis)
@@ -558,7 +558,11 @@ namespace HiSystems.Interpreter
 	                var variable = currentVariables.SingleOrDefault(aVariable => identifierToken == aVariable.Name);
 
 	                if (variable == null)
-	                    return new Variable(tokensEnum.Current.Value);
+                    {
+                        var newVariable = new Variable(tokensEnum.Current.Value);
+                        currentVariables.Add(newVariable);
+                        return newVariable;
+                    }
 	                else
 	                    return variable;
 	            }
