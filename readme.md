@@ -8,7 +8,7 @@ The Interpreter is an expression interpreter written in pure C#. It parses any m
 ### Examples:
 1. Passing a variable to the expression. The example below parses the express - and creates the expression tree via Engine.Parse(). The variables are then supplied to the expression and the expression executed via Execute().
 ```csharp
-var expression = Engine.Parse("SUM(A) * 2 - B");
+var expression = new Engine().Parse("SUM(A) * 2 - B");
 expression.Variables["A"].Value = new Array(new decimal[] { 1, 2, 3, 4 });
 expression.Variables["B"].Value = new Number(10);
 decimal result = expression.Execute();
@@ -16,7 +16,7 @@ decimal result = expression.Execute();
 
 2. Using an IF function:
 ```csharp
-decimal result = Engine.Parse("IF(1 < 2, 10, 20)").Execute();
+decimal result = new Engine().Parse("IF(1 < 2, 10, 20)").Execute();
 ```
 
 3. Custom functions can provide support for accessing data from a database:
@@ -43,7 +43,8 @@ class GetMyDataFunction : Function
 		// return new Array(new decimal[] { 1, 2, 3, 4 });
 	}
 }
-Engine.Register(new GetMyDataFunction());	
+var engine = new Engine();
+engine.Register(new GetMyDataFunction());	
 decimal result = Engine.Parse("SUM(GETMYDATA(MyTable, MyField))").Execute();
 ```
 
@@ -68,7 +69,8 @@ class NegateNumber : Function
         return new Number(-inputValue);
     }
 }
-Engine.Register(new NegateNumber());
+var engine = new Engine();
+engine.Register(new NegateNumber());
 decimal result = Engine.Parse("NEGATE(1)").Execute();
 ```
 
