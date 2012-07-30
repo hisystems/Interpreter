@@ -13,7 +13,7 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-	/// Adds two numeric values or a date and numeric value (adds days).
+	/// Adds two numeric values, text or a date and numeric value (adds days).
     /// </summary>
     public class AddOperator : Operator
     {
@@ -30,8 +30,10 @@ namespace HiSystems.Interpreter
                 return ((Number)argument1Transformed) + ((Number)argument2Transformed);
             else if (argument1Transformed is DateTime && argument2Transformed is Number)
                 return ((DateTime)argument1Transformed) + ((Number)argument2Transformed);
+            else if (argument1Transformed is Text && argument2Transformed is Text)
+                return ((Text)argument1Transformed) + ((Text)argument2Transformed);
             else
-                throw new InvalidOperationException(String.Format("Add operator requires arguments of type Number or DateTime. Argument types are {0} {1}.", argument1Transformed.GetType().Name, argument2Transformed.GetType().Name));
+                throw new InvalidOperationException(String.Format("Add operator requires arguments of type Number, DateTime or Text. Argument types are {0} {1}.", argument1Transformed.GetType().Name, argument2Transformed.GetType().Name));
         }
 
         public override string Token

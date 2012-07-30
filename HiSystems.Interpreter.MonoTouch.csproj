@@ -70,6 +70,7 @@
     <Compile Include="Operators\NotEqualToOperator.cs" />
     <Compile Include="Literals\DateTime.cs" />
     <Compile Include="Functions\Today.cs" />
+    <Compile Include="Literals\Text.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />

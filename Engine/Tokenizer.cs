@@ -25,11 +25,13 @@ namespace HiSystems.Interpreter
 			const char RightParenthesis = ')';
 			const char Comma = ',';
 			const char NumericNegative = '-';
+            const char TextDelimiter = '\"';
 
             var whitespaceCharacters = new[] { ' ', '\t' };
             var numericCharacters = new[] { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             var identifierCharacters = new[] { '_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 			bool isNumericNegative = false;
+            bool parsingText = false;
 
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
@@ -44,7 +46,21 @@ namespace HiSystems.Interpreter
 				// otherwise it is some other character TokenType.Other -- probably a subtraction operator.
 				isNumericNegative = character == NumericNegative && expressionEnumerator.CanPeek && numericCharacters.Contains(expressionEnumerator.Peek);
 
-                if (whitespaceCharacters.Contains(character))
+                if (character == TextDelimiter || parsingText)
+                {
+                    if (character == TextDelimiter && !parsingText)         // started parsing
+                    {
+                        AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
+                        currentToken = String.Empty;    // do not include quote characters around the string
+                        currentTokenType = TokenType.Text;
+                        parsingText = true;
+                    }
+                    else if (character == TextDelimiter && parsingText)     // finished parsing
+                        parsingText = false;
+                    else
+                        currentToken += character;
+                }
+                else if (whitespaceCharacters.Contains(character))
                 {
                     AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
                     currentToken = String.Empty;

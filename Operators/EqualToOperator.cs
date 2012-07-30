@@ -13,7 +13,7 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-	/// Compares two numeric, boolean or datetime values.
+	/// Compares two numeric, text, boolean or datetime values.
     /// </summary>
     public class EqualToOperator : Operator
     {
@@ -32,6 +32,8 @@ namespace HiSystems.Interpreter
 				return ((Boolean)argument1Transformed) == ((Boolean)argument2Transformed);
             else if (argument1Transformed is DateTime && argument2Transformed is DateTime)
                 return ((DateTime)argument1Transformed) == ((DateTime)argument2Transformed);
+            else if (argument1Transformed is Text && argument2Transformed is Text)
+                return ((Text)argument1Transformed) == ((Text)argument2Transformed);
 			else
                 throw new InvalidOperationException(String.Format("Equality operator requires arguments of type Number, DateTime or Boolean. Argument types are {0} {1}.", argument1Transformed.GetType().Name, argument2Transformed.GetType().Name));
         }

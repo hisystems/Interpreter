@@ -39,6 +39,11 @@ namespace HiSystems.Interpreter
 		/// </summary>
 		Comma,
 
+        /// <summary>
+        /// String literal, surrounded/delimited by a " character
+        /// </summary>
+        Text,
+
 		/// <summary>
 		/// Any other token that is not one of the other token types specified in this enum.
 		/// Usually a special character such as '*' or '^'.

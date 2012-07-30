@@ -274,6 +274,9 @@ namespace HiSystems.Interpreter
 					case TokenType.RightParenthesis:
                     	translatedTokens.Add(new RightParenthesisToken());
 						break;
+                    case TokenType.Text:
+                        translatedTokens.Add(new ConstructToken(new Text(token.Value)));
+                        break;
                     case TokenType.Other:
                         var operationForToken = allOperators
                             .Select(item => item.Operation)
