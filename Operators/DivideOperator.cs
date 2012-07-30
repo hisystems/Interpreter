@@ -28,7 +28,7 @@ namespace HiSystems.Interpreter
             if (argument2Value == 0)
                 throw new DivideByZeroException(argument2.ToString());
 
-            return new Number(base.GetTransformedConstruct<Number>(argument1) / argument2Value);
+            return base.GetTransformedConstruct<Number>(argument1) / argument2Value;
         }
 
         public override string Token

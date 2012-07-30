@@ -23,7 +23,7 @@ namespace HiSystems.Interpreter
 
         internal override Literal Execute(IConstruct argument1, IConstruct argument2)
         {
-            return new Number(base.GetTransformedConstruct<Number>(argument1) + base.GetTransformedConstruct<Number>(argument2));
+            return base.GetTransformedConstruct<Number>(argument1) + base.GetTransformedConstruct<Number>(argument2);
         }
 
         public override string Token

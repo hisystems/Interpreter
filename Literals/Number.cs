@@ -54,12 +54,75 @@ namespace HiSystems.Interpreter
 			return new Number(Decimal.Parse(value));
 		}
 
+        public static Boolean operator==(Number value1, Number value2)
+        {
+            return AreEqual(value1, value2);
+        }
+        
+        public static Boolean operator!=(Number value1, Number value2)
+        {
+            return !AreEqual(value1, value2);
+        }
+
+        public static Number operator+(Number value1, Number value2)
+        {
+            return new Number(value1.value + value2.value);
+        }
+        
+        public static Number operator-(Number value1, Number value2)
+        {
+            return new Number(value1.value - value2.value);
+        }
+
+        public static Number operator/(Number value1, Number value2)
+        {
+            return new Number(value1.value / value2.value);
+        }
+        
+        public static Boolean operator>(Number value1, Number value2)
+        {
+            return new Boolean(value1.value > value2.value);
+        }
+        
+        public static Boolean operator>=(Number value1, Number value2)
+        {
+            return new Boolean(value1.value >= value2.value);
+        }
+
+        public static Boolean operator<(Number value1, Number value2)
+        {
+            return new Boolean(value1.value < value2.value);
+        }
+        
+        public static Boolean operator<=(Number value1, Number value2)
+        {
+            return new Boolean(value1.value <= value2.value);
+        }
+        
+        public static Number operator*(Number value1, Number value2)
+        {
+            return new Number(value1.value * value2.value);
+        }
+
 		public override bool Equals (object obj)
 		{
 			if (obj == null || !(obj is Number))
 				return false;
 			else 
-				return ((Number)obj).value == this.value;
+                return AreEqual(this, (Number)obj);
 		}
+        
+        private static Boolean AreEqual(Number value1, Number value2)
+        {
+            if (ReferenceEquals(value1, null) || ReferenceEquals(value2, null))
+                return new Boolean(false);
+            else
+                return new Boolean(value1.value == value2.value);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

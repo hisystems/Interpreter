@@ -38,13 +38,61 @@ namespace HiSystems.Interpreter
 		{
 			return new Boolean(value);
 		}
-		
+
+        public static Boolean operator==(Boolean value1, Boolean value2)
+        {
+            return AreEqual(value1, value2);
+        }
+
+        public static Boolean operator!=(Boolean value1, Boolean value2)
+        {
+            return !AreEqual(value1, value2);
+        }
+        
+        public static Boolean operator&(Boolean value1, Boolean value2)
+        {
+            return value1.value & value2.value;
+        }
+
+        public static Boolean operator|(Boolean value1, Boolean value2)
+        {
+            return value1.value | value2.value;
+        }
+
+        public static Boolean operator!(Boolean value)
+        {
+            return new Boolean(!value.value);
+        }
+        
+        public static bool operator true(Boolean value)
+        {
+            return value.value;
+        }
+        
+        public static bool operator false(Boolean value)
+        {
+            return !value.value;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
 		public override bool Equals (object obj)
 		{
 			if (obj == null || !(obj is Boolean))
 				return false;
 			else 
-				return ((Boolean)obj).value == this.value;
+				return AreEqual(this, (Boolean)obj);
 		}
+
+        private static Boolean AreEqual(Boolean value1, Boolean value2)
+        {
+            if (ReferenceEquals(value1, null) || ReferenceEquals(value2, null))
+                return new Boolean(false);
+            else
+                return new Boolean(value1.value == value2.value);
+        }
     }
 }

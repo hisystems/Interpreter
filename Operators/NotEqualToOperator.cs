@@ -25,7 +25,7 @@ namespace HiSystems.Interpreter
 
         internal override Literal Execute(IConstruct argument1, IConstruct argument2)
         {
-			return new Boolean(!((bool)(Boolean)equalToOperator.Execute(argument1, argument2)));
+			return !(Boolean)equalToOperator.Execute(argument1, argument2);
         }
 
         public override string Token
