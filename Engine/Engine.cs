@@ -196,7 +196,7 @@ namespace HiSystems.Interpreter
 		{
             var variablesList = new List<Variable>();
             
-			return new Expression(ParseToConstruct(expression, variablesList), variablesList);
+			return new Expression(expression, ParseToConstruct(expression, variablesList), variablesList);
 		}
 
 		/// <summary>

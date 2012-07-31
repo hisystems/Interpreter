@@ -17,7 +17,19 @@ namespace HiSystems.Interpreter
     /// </summary>
     public class Expression : IConstruct
     {
+        /// <summary>
+        /// Only used for error reporting.
+        /// </summary>
+        private string expression;
+
+        /// <summary>
+        /// The root construct of the expression tree.
+        /// </summary>
         private IConstruct construct;
+
+        /// <summary>
+        /// All of the variables defined in the expression.
+        /// </summary>
 		private IDictionary<string, Variable> variables;
 
 		/// <summary>
@@ -26,12 +38,15 @@ namespace HiSystems.Interpreter
 		/// <param name='value'>
 		/// Root construct in the expression tree. Calling IConstruct.Transform will return the actual value.
 		/// </param>
-        internal Expression(IConstruct value, List<Variable> variables)
+        internal Expression(string originalExpression, IConstruct value, List<Variable> variables)
         {
 			if (value == null)
 				throw new ArgumentNullException();
-
+            else if (String.IsNullOrEmpty(originalExpression))
+                throw new ArgumentNullException();
+                
 			this.construct = value;
+            this.expression = originalExpression;
             this.variables = TranslateVariabelsToDictionary(variables);
         }
 
@@ -44,6 +59,21 @@ namespace HiSystems.Interpreter
 		{
 			return construct.Transform();
 		}
+
+        /// <summary>
+        /// Returns the calculated value for the expression.
+        /// Any variables should be set before calling this function.
+        /// Casts the return value to type T (of type Literal)
+        /// </summary>
+        public T Execute<T>() where T : Literal
+        {
+            Literal result = construct.Transform();
+
+            if (!(result is T))
+                throw new InvalidCastException(String.Format("Return value from '{0}' is of type {1}, not of type {2}", this.expression, result.GetType().Name, typeof(T).Name));
+
+            return (T)result;
+        }
 
 		/// <summary>
 		/// Returns a dictionary containing all of the variables that were defined in the expression.
