@@ -44,6 +44,11 @@ namespace HiSystems.Interpreter
         /// </summary>
         Text,
 
+        /// <summary>
+        /// Only used during parsing - the tokenizer will not return a whitespace token.
+        /// </summary>
+        Whitespace,
+
 		/// <summary>
 		/// Any other token that is not one of the other token types specified in this enum.
 		/// Usually a special character such as '*' or '^'.

@@ -77,7 +77,7 @@ namespace HiSystems.Interpreter
 
         public override string ToString()
         {
-			return this.name + ": " + this.construct.ToString();
+			return this.name + ": " + (this.construct == null ? String.Empty : this.construct.ToString());
         }
     }
 }

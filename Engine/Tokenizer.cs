@@ -1,4 +1,4 @@
-﻿/* _________________________________________________
+/* _________________________________________________
 
   (c) Hi-Integrity Systems 2012. All rights reserved.
   www.hisystems.com.au - Toby Wicks
@@ -36,10 +36,13 @@ namespace HiSystems.Interpreter
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
             var currentToken = String.Empty;
+            var characterTokenType = TokenType.Other;
 			var expressionEnumerator = new PeekableEnumerator<char>(expression);
+            var characterString = String.Empty;
 
             while (expressionEnumerator.MoveNext())
             {
+                var tokenIsSeparateCharacter = false;
 				var character = expressionEnumerator.Current;
 
 				// if the character is a '-' and the subsequent character is a numeric character then this is a negative number. 
@@ -50,90 +53,73 @@ namespace HiSystems.Interpreter
                 {
                     if (character == TextDelimiter && !parsingText)         // started parsing
                     {
-                        AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                        currentToken = String.Empty;    // do not include quote characters around the string
-                        currentTokenType = TokenType.Text;
+                        characterTokenType = TokenType.Text;
+                        characterString = String.Empty;         // consume character
                         parsingText = true;
                     }
                     else if (character == TextDelimiter && parsingText)     // finished parsing
+                    {
+                        characterString = String.Empty;         // consume character
                         parsingText = false;
+                    }
                     else
-                        currentToken += character;
+                        characterString = character.ToString();
                 }
                 else if (whitespaceCharacters.Contains(character))
                 {
-                    AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                    currentToken = String.Empty;
-                    currentTokenType = TokenType.Other;
+                    characterTokenType = TokenType.Whitespace;
+                    characterString = String.Empty;             // consume character
                 }
                 else if (identifierCharacters.Contains(character))
                 {
-                    if (currentTokenType == TokenType.Identifier)
-                        currentToken += character;
-                    else
-                    {
-                        AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                        currentToken = character.ToString();
-                        currentTokenType = TokenType.Identifier;
-                    }
+                    characterTokenType = TokenType.Identifier;
+                    characterString = character.ToString();
                 }
                 else if (numericCharacters.Contains(character) || isNumericNegative)
                 {
-                    if (currentTokenType == TokenType.Number)
-                        currentToken += character;
-                    else
-                    {
-                        AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                        currentToken = character.ToString();
-                        currentTokenType = TokenType.Number;
-                    }
+                    characterTokenType = TokenType.Number;
+                    characterString = character.ToString();
                 }
                 else if (character == LeftParenthesis)
-				{
-                    AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                    AddToken(tokens, TokenType.LeftParenthesis, character.ToString());
-                	currentToken = String.Empty;
-				}
+                {
+                    characterTokenType = TokenType.LeftParenthesis;
+                    characterString = character.ToString();
+                    tokenIsSeparateCharacter = true;
+                }
                 else if (character == RightParenthesis)
-				{
-                    AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                    AddToken(tokens, TokenType.RightParenthesis, character.ToString());
-                	currentToken = String.Empty;
-				}
+                {
+                    characterTokenType = TokenType.RightParenthesis;
+                    characterString = character.ToString();
+                    tokenIsSeparateCharacter = true;
+                }
                 else if (character == Comma)
-				{
-                    AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                    AddToken(tokens, TokenType.Comma, character.ToString());
-                	currentToken = String.Empty;
+                {
+                    characterTokenType = TokenType.Comma;
+                    characterString = character.ToString();
+                    tokenIsSeparateCharacter = true;
                 }
 				else
-				{
-                    if (currentTokenType == TokenType.Other)
-                        currentToken += character;
-                    else
-                    {
-                        AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
-                        currentToken = character.ToString();
-                        currentTokenType = TokenType.Other;
-                    }
-				}
+                {
+                    characterTokenType = TokenType.Other;
+                    characterString = character.ToString();
+                }
+
+                if (currentTokenType == characterTokenType && !tokenIsSeparateCharacter)
+                    currentToken += characterString;
+                else
+                {
+                    if (currentToken.Length > 0)
+                        tokens.Add(new Token(currentToken, currentTokenType));
+
+                    currentToken = characterString;
+                    currentTokenType = characterTokenType;
+                }
             }
 
-            AddTokenIfItsNotEmpty(tokens, currentTokenType, currentToken);
+            if (currentToken.Length > 0)
+                tokens.Add(new Token(currentToken, currentTokenType));
 
             return tokens;
-        }
-
-        private static void AddTokenIfItsNotEmpty(List<Token> tokens, TokenType tokenType, string token)
-        {
-            // add the previous token to the list
-            if (token.Length > 0)
-                AddToken(tokens, tokenType, token);
-        }
-
-        private static void AddToken(List<Token> tokens, TokenType tokenType, string token)
-        {
-            tokens.Add(new Token(token, tokenType));
         }
     }
 }
