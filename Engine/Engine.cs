@@ -18,19 +18,17 @@ namespace HiSystems.Interpreter
 	///   - variables
 	///   - functions (custom functions also)
 	///   - operators (mathematical / logical)
-	///   - literals (numbers) -- 'true/false' cannot be parsed but can be substituted with 1 or 0.
+    ///   - literals (numbers, dates, strings)
 	///   - parentheses - for precedence
 	/// The Parse function will interpret the expression and return an Expression object.
 	/// The expression can be supplied with the appropriate variables. 
 	/// And then executed via the Expression.Execute() function.
 	/// Example expressions:
-	/// 
 	///  'IF(A > B, A, B)' 	-- requires calling Expression.Variables["A"] = (Number)1; Expression.Variables["B"] = (Number)2;
 	///  'true or false'
 	///  '(1 + 2) * 3 / 4'
-	/// 
-	/// Limitations:
-	///   Does not support string manipulation functions - although this could be easily intergrated.
+    /// 
+    /// See readme.md for further examples.
 	/// </summary>
     public class Engine
     {
