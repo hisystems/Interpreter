@@ -35,8 +35,8 @@ class GetMyDataFunction : Function
 	{
 		base.EnsureArgumentCountIs(arguments, 2);
 	
-		var tableName = base.GetVariable(arguments, 0).Name;
-		var fieldName = base.GetVariable(arguments, 1).Name;
+		var tableName = base.GetTransformedArgument<Text>(arguments, 0);
+		var fieldName = base.GetTransformedArgument<Text>(arguments, 1);
 
 		// Retrieve data using tableName and fieldName and return Array<Number>.
 		// This return value can then be used by any functions that accept Array<Number> as an argument such as SUM().
@@ -45,7 +45,7 @@ class GetMyDataFunction : Function
 }
 var engine = new Engine();
 engine.Register(new GetMyDataFunction());	
-decimal result = Engine.Parse("SUM(GETMYDATA(MyTable, MyField))").Execute();
+decimal result = Engine.Parse("SUM(GETMYDATA(\"MyTable\", \"MyField\"))").Execute();
 ```
 
 4. Custom functions that manipulate values:
@@ -83,11 +83,12 @@ decimal result = Engine.Parse("NEGATE(1)").Execute();
 ### Supported data types (can be extended)
 * Number/decimal
 * Boolean
-* Array - Of either Number or Boolean
+* Array - Of either Number, Boolean or Text
+* Text - Character string - delimited by " characters
 
 ### Supported Operations (can be extended)
-* +		- addition
-* -		- subtraction
+* +		- addition  (numbers, date/time + number, string concatenation)
+* -		- subtraction (numbers, date/time - number)
 * /		- divide
 * *		- multiply
 * =		- equal
@@ -114,4 +115,5 @@ The unit test project is available in a separate repository on [Github here](htt
 For example:
 
 /Interpreter
+
 /Interpreter.UnitTests
