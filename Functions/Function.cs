@@ -43,7 +43,7 @@ namespace HiSystems.Interpreter
 		/// </summary>
 		protected void EnsureArgumentCountIsAtLeast(IConstruct[] arguments, int minimumArgumentCount)
 		{
-			if (minimumArgumentCount < arguments.Length)
+            if (minimumArgumentCount > arguments.Length)
 				throw new InvalidOperationException(String.Format("{0} has been supplied {1} arguments, but expects at least {2} arguments", this.Name, arguments.Length, minimumArgumentCount));
 		}
 		
