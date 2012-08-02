@@ -25,18 +25,19 @@ namespace HiSystems.Interpreter
 			const char RightParenthesis = ')';
 			const char Comma = ',';
 			const char NumericNegative = '-';
-            const char TextDelimiter = '\"';
 
             var whitespaceCharacters = new[] { ' ', '\t' };
             var numericCharacters = new[] { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             var identifierCharacters = new[] { '_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
             var identifierSecondaryCharacters = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };     // other characters that can be used as identifiers - but cannot be a starting character
+			var textDelimiters = new[] { '\"', '\'' };
 			bool isNumericNegative = false;
             bool parsingText = false;
 
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
             var currentToken = String.Empty;
+			char currentTextDelimiter = '\0';
             var characterTokenType = TokenType.Other;
 			var expressionEnumerator = new PeekableEnumerator<char>(expression);
             var characterString = String.Empty;
@@ -50,15 +51,16 @@ namespace HiSystems.Interpreter
 				// otherwise it is some other character TokenType.Other -- probably a subtraction operator.
 				isNumericNegative = character == NumericNegative && expressionEnumerator.CanPeek && numericCharacters.Contains(expressionEnumerator.Peek);
 
-                if (character == TextDelimiter || parsingText)
+                if (textDelimiters.Contains(character) || parsingText)
                 {
-                    if (character == TextDelimiter && !parsingText)         // started parsing
+                    if (textDelimiters.Contains(character) && !parsingText)         // started parsing
                     {
                         characterTokenType = TokenType.Text;
                         characterString = String.Empty;         // consume character
+						currentTextDelimiter = character;
                         parsingText = true;
                     }
-                    else if (character == TextDelimiter && parsingText)     // finished parsing
+                    else if (character == currentTextDelimiter && parsingText)     // finished parsing
                     {
                         characterString = String.Empty;         // consume character
                         parsingText = false;
