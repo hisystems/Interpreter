@@ -476,7 +476,8 @@ namespace HiSystems.Interpreter
             if (!(tokensEnum.MoveNext() && tokensEnum.Current.Type == TokenType.LeftParenthesis))
 				throw new InvalidOperationException(String.Format("{0} arguments; first token should be '(' not '{1}'", functionName, tokensEnum.Current.Value));
             else if (tokensEnum.Current.Type == TokenType.LeftParenthesis && tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.RightParenthesis)
-                ;   // no arguments were specified - empty parentheses were specified
+                // No arguments were specified - empty parentheses were specified
+                tokensEnum.MoveNext();;      // consume the left parenthesis token and point it to the right parenthesis token - i.e. the end of the function
             else
             {
 				bool reachedEndOfArguments = false;
