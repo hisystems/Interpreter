@@ -47,6 +47,19 @@ namespace HiSystems.Interpreter
 				throw new InvalidOperationException(String.Format("{0} has been supplied {1} arguments, but expects at least {2} arguments", this.Name, arguments.Length, minimumArgumentCount));
 		}
 		
+        /// <summary>
+        /// Throws an exception if the number of arguments supplied is less then the minimum required number of arguments.
+        /// Or throws an exception if the number of arguments supplied is greater then the maximum allowable number of arguments.
+        /// Useful when the function can receive optional or a variable number of arguments.
+        /// </summary>
+        protected void EnsureArgumentCountIsBetween(IConstruct[] arguments, int minimumArgumentCount, int maximumArgumentCount)
+        {
+            EnsureArgumentCountIsAtLeast(arguments, minimumArgumentCount);
+
+            if (maximumArgumentCount < arguments.Length)
+                throw new InvalidOperationException(String.Format("{0} has been supplied {1} arguments, but expects at most {2} arguments", this.Name, arguments.Length, maximumArgumentCount));
+        }
+        
 		/// <summary>
 		/// Returns an array of decimal values from a construct which must be of type Array.
 		/// Minimise the use of this function because it will traverse and execute the entire expression tree if the construct represents an operation or function.
