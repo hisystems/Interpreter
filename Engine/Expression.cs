@@ -88,7 +88,15 @@ namespace HiSystems.Interpreter
 				return this.variables;
 			}
 		}
-		
+
+        /// <summary>
+        /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
+        /// </summary>
+        public static implicit operator Expression(string stringLiteral)
+        {
+            return new Expression("\"" + stringLiteral + "\"", new Text(stringLiteral), new List<Variable>());
+        }
+
         /// Returns a distinct list of variables from the expression.
         /// </summary>
         private static IDictionary<string, Variable> TranslateVariabelsToDictionary(List<Variable> variables)
