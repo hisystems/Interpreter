@@ -96,6 +96,14 @@ namespace HiSystems.Interpreter
         {
             return new Expression("\"" + stringLiteral + "\"", new Text(stringLiteral), new List<Variable>());
         }
+        
+        /// <summary>
+        /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
+        /// </summary>
+        public static implicit operator Expression(bool value)
+        {
+            return new Expression(value.ToString(), new Boolean(value), new List<Variable>());
+        }
 
         /// Returns a distinct list of variables from the expression.
         /// </summary>
