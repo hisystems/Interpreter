@@ -275,6 +275,9 @@ namespace HiSystems.Interpreter
                     case TokenType.Text:
                         translatedTokens.Add(new ConstructToken(new Text(token.Value)));
                         break;
+                    case TokenType.DateTime:
+                        translatedTokens.Add(new ConstructToken(new DateTime(System.DateTime.Parse(token.Value))));
+                        break;
                     case TokenType.Other:
                         var operationForToken = allOperators
                             .Select(item => item.Operation)

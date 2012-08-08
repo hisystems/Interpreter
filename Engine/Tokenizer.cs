@@ -25,6 +25,7 @@ namespace HiSystems.Interpreter
 			const char RightParenthesis = ')';
 			const char Comma = ',';
 			const char NumericNegative = '-';
+            const char DateTimeDelimiter = '#';
 
             var whitespaceCharacters = new[] { ' ', '\t' };
             var numericCharacters = new[] { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -33,6 +34,7 @@ namespace HiSystems.Interpreter
 			var textDelimiters = new[] { '\"', '\'' };
 			bool isNumericNegative = false;
             bool parsingText = false;
+            bool parsingDateTime = false;
 
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
@@ -66,6 +68,22 @@ namespace HiSystems.Interpreter
                         parsingText = false;
                     }
                     else
+                        characterString = character.ToString();
+                }
+                else if (character == DateTimeDelimiter || parsingDateTime)
+                {
+                    if (!parsingDateTime)                       // started parsing
+                    {
+                        characterTokenType = TokenType.DateTime;
+                        characterString = String.Empty;     // consume character
+                        parsingDateTime = true;
+                    }
+                    else if (character == DateTimeDelimiter)    // finished parsing
+                    {
+                        characterString = String.Empty;     // consume character
+                        parsingDateTime = false;
+                    }
+                    else 
                         characterString = character.ToString();
                 }
                 else if (whitespaceCharacters.Contains(character))

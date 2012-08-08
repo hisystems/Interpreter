@@ -49,6 +49,11 @@ namespace HiSystems.Interpreter
         /// </summary>
         Whitespace,
 
+        /// <summary>
+        /// Value is surrounded by # characters.
+        /// </summary>
+        DateTime,
+
 		/// <summary>
 		/// Any other token that is not one of the other token types specified in this enum.
 		/// Usually a special character such as '*' or '^'.
