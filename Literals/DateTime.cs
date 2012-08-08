@@ -58,6 +58,11 @@ namespace HiSystems.Interpreter
         {
             return new DateTime(date.value.AddDays(-(double)days));
         }
+        
+        public static Number operator-(DateTime date1, DateTime date2)
+        {
+            return new Number(Convert.ToDecimal((date1.value - date2.value).TotalDays));
+        }
 
         public static Boolean operator>(DateTime value1, DateTime value2)
         {
