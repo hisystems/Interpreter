@@ -38,6 +38,17 @@ namespace HiSystems.Interpreter
 		}
 
         /// <summary>
+        /// The function that will be executed when this construct is transformed.
+        /// </summary>
+        public Function Function
+        {
+            get
+            {
+                return this.function;
+            }
+        }
+
+        /// <summary>
         /// The arguments supplied to the function
         /// </summary>
         public IConstruct[] Arguments
