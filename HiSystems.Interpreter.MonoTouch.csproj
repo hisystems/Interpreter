@@ -71,6 +71,7 @@
     <Compile Include="Literals\DateTime.cs" />
     <Compile Include="Functions\Today.cs" />
     <Compile Include="Literals\Text.cs" />
+    <Compile Include="Operators\ModulusOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />

@@ -109,6 +109,11 @@ namespace HiSystems.Interpreter
             return new Number(value1.value * value2.value);
         }
 
+        public static Number operator%(Number value1, Number value2)
+        {
+            return new Number(value1.value % value2.value);
+        }
+
 		public override bool Equals (object obj)
 		{
 			if (obj == null || !(obj is Number))

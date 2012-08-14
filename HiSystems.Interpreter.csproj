@@ -65,6 +65,7 @@
     <Compile Include="Operators\GreaterThanOrEqualToOperator.cs" />
     <Compile Include="Operators\LessThanOperator.cs" />
     <Compile Include="Operators\LessThanOrEqualToOperator.cs" />
+    <Compile Include="Operators\ModulusOperator.cs" />
     <Compile Include="Operators\MultiplyOperator.cs" />
     <Compile Include="Operators\NotEqualToOperator.cs" />
     <Compile Include="Operators\Operator.cs" />

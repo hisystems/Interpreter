@@ -135,6 +135,7 @@ namespace HiSystems.Interpreter
         private static OperatorAndPrecedence[] allOperators = new [] {
             new OperatorAndPrecedence() { Operation = new MultiplyOperator(), Precedence = 6 },
             new OperatorAndPrecedence() { Operation = new DivideOperator(), Precedence = 6 },
+            new OperatorAndPrecedence() { Operation = new ModulusOperator(), Precedence = 6 },
             new OperatorAndPrecedence() { Operation = new AddOperator(), Precedence = 5 },
             new OperatorAndPrecedence() { Operation = new SubtractOperator(), Precedence = 5 },
             new OperatorAndPrecedence() { Operation = new LessThanOperator(), Precedence = 4 },
