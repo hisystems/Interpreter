@@ -59,6 +59,7 @@
     <Compile Include="Literals\DateTime.cs" />
     <Compile Include="Literals\Literal.cs" />
     <Compile Include="Literals\Number.cs" />
+    <Compile Include="Literals\Text.cs" />
     <Compile Include="Operators\AddOperator.cs" />
     <Compile Include="Operators\AndOperator.cs" />
     <Compile Include="Operators\DivideOperator.cs" />
