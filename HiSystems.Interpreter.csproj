@@ -52,9 +52,11 @@
     <Compile Include="Functions\Function.cs" />
     <Compile Include="Functions\If.cs" />
     <Compile Include="Functions\Sum.cs" />
+    <Compile Include="Functions\Today.cs" />
     <Compile Include="Library\PeekableEnumerator.cs" />
     <Compile Include="Literals\Array.cs" />
     <Compile Include="Literals\Boolean.cs" />
+    <Compile Include="Literals\DateTime.cs" />
     <Compile Include="Literals\Literal.cs" />
     <Compile Include="Literals\Number.cs" />
     <Compile Include="Operators\AddOperator.cs" />
