@@ -72,6 +72,7 @@
     <Compile Include="Functions\Today.cs" />
     <Compile Include="Literals\Text.cs" />
     <Compile Include="Operators\ModulusOperator.cs" />
+    <Compile Include="Functions\Format.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />

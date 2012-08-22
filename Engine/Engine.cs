@@ -178,6 +178,7 @@ namespace HiSystems.Interpreter
             Register(new Sum());
             Register(new Average());
             Register(new If());
+            Register(new Format());
         }
 
 		/// <summary>

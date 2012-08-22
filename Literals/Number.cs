@@ -29,6 +29,11 @@ namespace HiSystems.Interpreter
             return value.ToString();
         }
 		
+        public string ToString(string format)
+        {
+            return value.ToString(format);
+        }
+        
 		public static implicit operator decimal(Number number)
 		{
 			return number.value;
