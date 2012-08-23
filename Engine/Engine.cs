@@ -179,6 +179,8 @@ namespace HiSystems.Interpreter
             Register(new Average());
             Register(new If());
             Register(new Format());
+            Register(new Max());
+            Register(new ArrayFunction());
         }
 
 		/// <summary>

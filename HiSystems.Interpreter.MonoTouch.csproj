@@ -73,6 +73,8 @@
     <Compile Include="Literals\Text.cs" />
     <Compile Include="Operators\ModulusOperator.cs" />
     <Compile Include="Functions\Format.cs" />
+    <Compile Include="Functions\Max.cs" />
+    <Compile Include="Functions\ArrayFunction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />
