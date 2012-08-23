@@ -116,5 +116,10 @@ namespace HiSystems.Interpreter
         {
             return construct.Transform();
         }
+
+        public override string ToString()
+        {
+            return expression;
+        }
     }
 }
