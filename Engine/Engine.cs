@@ -472,9 +472,6 @@ namespace HiSystems.Interpreter
         /// When a ')' is found then the end of the arguments is presumed to have been found.
         /// </summary>
         /// <param name="tokensEnum">Expected to be currently pointing to the name of the function. The next token SHOULD be a '('</param>
-		/// <remarks>
-		/// NOTE: Currently, expressions as arguments is not supported. i.e. SUM(1 + 2, 3) will not work.
-		/// </remarks>
         private IConstruct[] GetFunctionArguments(PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
         {
             var arguments = new List<IConstruct>();
