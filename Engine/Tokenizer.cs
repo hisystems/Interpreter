@@ -129,7 +129,7 @@ namespace HiSystems.Interpreter
                     currentToken += characterString;
                 else
                 {
-                    if (currentToken.Length > 0)
+                    if (currentToken.Length > 0 || currentTokenType == TokenType.Text)
                         tokens.Add(new Token(currentToken, currentTokenType));
 
                     currentToken = characterString;
@@ -137,7 +137,7 @@ namespace HiSystems.Interpreter
                 }
             }
 
-            if (currentToken.Length > 0)
+            if (currentToken.Length > 0 || currentTokenType == TokenType.Text)
                 tokens.Add(new Token(currentToken, currentTokenType));
 
             return tokens;
