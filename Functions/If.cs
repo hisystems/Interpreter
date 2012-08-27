@@ -33,10 +33,11 @@ namespace HiSystems.Interpreter
 			base.EnsureArgumentCountIs(arguments, 3);
 
 			var condition = base.GetTransformedArgument<Boolean>(arguments, argumentIndex: 0);
-			var trueResult = base.GetTransformedArgument<Literal>(arguments, argumentIndex: 1);
-			var falseResult = base.GetTransformedArgument<Literal>(arguments, argumentIndex: 2);
 
-			return condition ? trueResult : falseResult;
+			if (condition)
+                return base.GetTransformedArgument<Literal>(arguments, argumentIndex: 1);
+            else 
+                return base.GetTransformedArgument<Literal>(arguments, argumentIndex: 2);
         }
     }
 }
