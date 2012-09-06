@@ -67,7 +67,7 @@ namespace HiSystems.Interpreter
         /// </summary>
         public T Execute<T>() where T : Literal
         {
-            Literal result = construct.Transform();
+			Literal result = this.Execute();
 
             if (!(result is T))
                 throw new InvalidCastException(String.Format("Return value from '{0}' is of type {1}, not of type {2}", this.expression, result.GetType().Name, typeof(T).Name));
