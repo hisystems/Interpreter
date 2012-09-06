@@ -554,10 +554,15 @@ namespace HiSystems.Interpreter
 			} 
 			else
 			{
-	            var functionForToken = allFunctions.SingleOrDefault(aFunction => identifierToken == aFunction.Name);
+				if (tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.LeftParenthesis)
+				{
+					var functionForToken = allFunctions.SingleOrDefault(aFunction => identifierToken == aFunction.Name);
 
-	            if (functionForToken != null && tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.LeftParenthesis)
-	                return new FunctionOperation(functionForToken, GetFunctionArguments(tokensEnum, currentVariables));
+					if (functionForToken == null)
+						throw new InvalidOperationException(String.Format("Function '{0}' is undefined", identifierToken));
+					else
+						return new FunctionOperation(functionForToken, GetFunctionArguments(tokensEnum, currentVariables));
+				}
 	            else
 	            {
 	                // ensure there is only one Variable instance for the same variable name
