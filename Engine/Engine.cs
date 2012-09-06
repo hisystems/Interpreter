@@ -180,6 +180,7 @@ namespace HiSystems.Interpreter
             Register(new If());
             Register(new Format());
             Register(new Max());
+            Register(new Min());
             Register(new ArrayFunction());
         }
 

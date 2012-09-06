@@ -75,6 +75,7 @@
     <Compile Include="Functions\Format.cs" />
     <Compile Include="Functions\Max.cs" />
     <Compile Include="Functions\ArrayFunction.cs" />
+    <Compile Include="Functions\Min.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />
