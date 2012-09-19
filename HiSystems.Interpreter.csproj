@@ -48,9 +48,13 @@
     <Compile Include="Engine\Expression.cs" />
     <Compile Include="Engine\Token.cs" />
     <Compile Include="Engine\Tokenizer.cs" />
+    <Compile Include="Functions\ArrayFunction.cs" />
     <Compile Include="Functions\Average.cs" />
+    <Compile Include="Functions\Format.cs" />
     <Compile Include="Functions\Function.cs" />
     <Compile Include="Functions\If.cs" />
+    <Compile Include="Functions\Max.cs" />
+    <Compile Include="Functions\Min.cs" />
     <Compile Include="Functions\Sum.cs" />
     <Compile Include="Functions\Today.cs" />
     <Compile Include="Library\PeekableEnumerator.cs" />
