@@ -45,7 +45,7 @@ class GetMyDataFunction : Function
 }
 var engine = new Engine();
 engine.Register(new GetMyDataFunction());	
-decimal result = Engine.Parse("SUM(GETMYDATA(\"MyTable\", \"MyField\"))").Execute();
+decimal result = Engine.Parse("SUM(GETMYDATA('MyTable', 'MyField'))").Execute();
 ```
 
 4. Custom functions that manipulate values:
@@ -78,13 +78,38 @@ decimal result = Engine.Parse("NEGATE(1)").Execute();
 * SUM(array)
 * AVG(array)
 * IF(condition, trueResult, falseResult)
+* Array(item1, item2, ...) 
+* Format(value [, format])  -- Formats a number or date/time
+* 
 * Custom functions can be created by extending Function and registered it via `Engine.Register(Function)`
 
 ### Supported data types (can be extended)
 * Number/decimal
+  - Example: 1.0
 * Boolean
-* Array - Of either Number, Boolean or Text
-* Text - Character string - delimited by " characters
+  - Supports constants 'true' and 'false'
+  - Example: true <> false
+* Array
+  - Can contain all data types
+  - Data types can be mixed in the same array
+  - Example: Array(1, 2, 3, 4)
+* Text
+  - Delimited by " or ' characters
+  - Exampe: 'ABC'
+* Date/Time 
+  - Surrounded by '#' characters
+  - Example: #2000-01-30 12:30:03# 
+* If(condition, trueResult, falseResult)
+  - Example: If(1 > 2, 10, 20)
+* Max(array)
+  - Example: Max(Array(1, 2, 3))
+* Min(array)
+  - Example: Min(Array(1, 2, 3))
+* Sum(array):
+  - Example: Sum(Array(1, 2, 3))
+* Today:
+  - Returns the date component (no time component) for today.
+  - Example: Today() + 1  -- returns the date for tomorrow
 
 ### Supported Operations (can be extended)
 * +		- addition  (numbers, date/time + number, string concatenation)
