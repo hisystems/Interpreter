@@ -182,6 +182,7 @@ namespace HiSystems.Interpreter
             Register(new Max());
             Register(new Min());
             Register(new ArrayFunction());
+            Register(new Today());
         }
 
 		/// <summary>
