@@ -13,23 +13,23 @@ using System.Diagnostics;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// The interpreter engine interprets single expressions that can contain;
-	///   - variables
-	///   - functions (custom functions also)
-	///   - operators (mathematical / logical)
+    /// <summary>
+    /// The interpreter engine interprets single expressions that can contain;
+    ///   - variables
+    ///   - functions (custom functions also)
+    ///   - operators (mathematical / logical)
     ///   - literals (numbers, dates, strings)
-	///   - parentheses - for precedence
-	/// The Parse function will interpret the expression and return an Expression object.
-	/// The expression can be supplied with the appropriate variables. 
-	/// And then executed via the Expression.Execute() function.
-	/// Example expressions:
-	///  'IF(A > B, A, B)' 	-- requires calling Expression.Variables["A"] = (Number)1; Expression.Variables["B"] = (Number)2;
-	///  'true or false'
-	///  '(1 + 2) * 3 / 4'
+    ///   - parentheses - for precedence
+    /// The Parse function will interpret the expression and return an Expression object.
+    /// The expression can be supplied with the appropriate variables. 
+    /// And then executed via the Expression.Execute() function.
+    /// Example expressions:
+    ///  'IF(A > B, A, B)'  -- requires calling Expression.Variables["A"] = (Number)1; Expression.Variables["B"] = (Number)2;
+    ///  'true or false'
+    ///  '(1 + 2) * 3 / 4'
     /// 
     /// See readme.md for further examples.
-	/// </summary>
+    /// </summary>
     public class Engine
     {
         private class OperatorAndPrecedence
@@ -37,7 +37,7 @@ namespace HiSystems.Interpreter
             public Operator Operation;
             public int Precedence;
         }
-		
+        
         private abstract class TranslatedToken
         {
         }
@@ -47,12 +47,12 @@ namespace HiSystems.Interpreter
             private IConstruct value;
 
             public ConstructToken(IConstruct value)
-	        {
+            {
                 if (value == null)
                     throw new ArgumentNullException();
 
                 this.value = value;
-	        }
+            }
 
             public IConstruct Value
             {
@@ -73,12 +73,12 @@ namespace HiSystems.Interpreter
             private Operator operation;
 
             public OperatorToken(Operator operation)
-	        {
+            {
                 if (operation == null)
                     throw new ArgumentNullException();
 
                 this.operation = operation;
-	        }
+            }
 
             public Operator Value
             {
@@ -109,19 +109,19 @@ namespace HiSystems.Interpreter
                 return ")";
             }
         }
-		
-		private class ReservedWord
-		{
-			/// <summary>
-			/// The word that identifies the reserved word.
-			/// </summary>
-			public string Word;
+        
+        private class ReservedWord
+        {
+            /// <summary>
+            /// The word that identifies the reserved word.
+            /// </summary>
+            public string Word;
 
-			/// <summary>
-			/// The construct that identifies the keyword.
-			/// </summary>
-			public IConstruct Construct;
-		}
+            /// <summary>
+            /// The construct that identifies the keyword.
+            /// </summary>
+            public IConstruct Construct;
+        }
 
         /// <summary>
         /// </summary>
@@ -148,20 +148,20 @@ namespace HiSystems.Interpreter
             new OperatorAndPrecedence() { Operation = new OrOperator(), Precedence = 1 }
         };
 
-		/// <summary>
-		/// Indicates which tokens of type Identifier need to be translated into special tokens.
-		/// </summary>
-		private static ReservedWord[] reservedWords = new [] 
-		{
-			new ReservedWord() { Word = "true", Construct = new Boolean(true) },
-			new ReservedWord() { Word = "false", Construct = new Boolean(false) }
-		};
+        /// <summary>
+        /// Indicates which tokens of type Identifier need to be translated into special tokens.
+        /// </summary>
+        private static ReservedWord[] reservedWords = new [] 
+        {
+            new ReservedWord() { Word = "true", Construct = new Boolean(true) },
+            new ReservedWord() { Word = "false", Construct = new Boolean(false) }
+        };
 
         /// <summary>
         /// </summary>
         private static int parenthesisPrecendence;
         private List<Function> allFunctions = new List<Function>();
-		
+        
         static Engine() 
         {
             // Parentheses have higher precedence than all operations
@@ -185,40 +185,40 @@ namespace HiSystems.Interpreter
             Register(new Today());
         }
 
-		/// <summary>
-		/// Registers the function, so that the function can be utilised by the engine.
-		/// Must be called before Engine.Parse() otherwise the function will not be recognised.
-		/// </summary>
-		public void Register(Function function)
-		{
-			allFunctions.Add(function);
-		}
-		
-		/// <summary>
-		/// Parses the expression and prepares it for execution.
-		/// The returned Expression can then be populated with variables if necessary
-		/// and then executed via Expression.Execute().
+        /// <summary>
+        /// Registers the function, so that the function can be utilised by the engine.
+        /// Must be called before Engine.Parse() otherwise the function will not be recognised.
+        /// </summary>
+        public void Register(Function function)
+        {
+            allFunctions.Add(function);
+        }
+        
+        /// <summary>
+        /// Parses the expression and prepares it for execution.
+        /// The returned Expression can then be populated with variables if necessary
+        /// and then executed via Expression.Execute().
         public Expression Parse(string expression)
-		{
+        {
             var variablesList = new List<Variable>();
             
-			return new Expression(expression, ParseToConstruct(expression, variablesList), variablesList);
-		}
-
-		/// <summary>
-		/// Parses the expression and prepares it for execution.
-		/// </summary>
-        private IConstruct ParseToConstruct(string expression, List<Variable> currentVariables)
-        {
-			return GetConstructFromTokens(Tokenizer.Parse(expression), currentVariables);
+            return new Expression(expression, ParseToConstruct(expression, variablesList), variablesList);
         }
 
-		/// <summary>
-		/// Creates the construct from a set of tokens.
-		/// This is used to parse an entire expression and also an expression from a function's argument.
-		/// </summary>
-		private IConstruct GetConstructFromTokens(List<Token> tokens, List<Variable> currentVariables)
-		{
+        /// <summary>
+        /// Parses the expression and prepares it for execution.
+        /// </summary>
+        private IConstruct ParseToConstruct(string expression, List<Variable> currentVariables)
+        {
+            return GetConstructFromTokens(Tokenizer.Parse(expression), currentVariables);
+        }
+
+        /// <summary>
+        /// Creates the construct from a set of tokens.
+        /// This is used to parse an entire expression and also an expression from a function's argument.
+        /// </summary>
+        private IConstruct GetConstructFromTokens(List<Token> tokens, List<Variable> currentVariables)
+        {
             // Translate the tokens to meaningful tokens such as a variables, functions and operators
             // Unknown or unexpected tokens will cause an exception to be thrown
             var translatedTokens = TranslateTokens(tokens, currentVariables);
@@ -243,7 +243,7 @@ namespace HiSystems.Interpreter
                 // Enumerate through the ordered nodes and branch tree appropriately
                 return TranslateToTreeUsingPrecedence(expressions);
             }
-		}
+        }
  
         /// <summary>
         /// Translates the tokens into meaningful functions, operations and values.
@@ -272,12 +272,12 @@ namespace HiSystems.Interpreter
                         else
                             translatedTokens.Add(new ConstructToken(TranslateIdentifierToken(tokensEnum, currentVariables)));
                         break;
-					case TokenType.LeftParenthesis:
-                    	translatedTokens.Add(new LeftParenthesisToken());
-						break;
-					case TokenType.RightParenthesis:
-                    	translatedTokens.Add(new RightParenthesisToken());
-						break;
+                    case TokenType.LeftParenthesis:
+                        translatedTokens.Add(new LeftParenthesisToken());
+                        break;
+                    case TokenType.RightParenthesis:
+                        translatedTokens.Add(new RightParenthesisToken());
+                        break;
                     case TokenType.Text:
                         translatedTokens.Add(new ConstructToken(new Text(token.Value)));
                         break;
@@ -291,10 +291,10 @@ namespace HiSystems.Interpreter
 
                         if (operationForToken != null)
                             translatedTokens.Add(new OperatorToken(operationForToken));
-						else
+                        else
                             throw new InvalidOperationException(token.Value + " in an unknown operation");
 
-						break;
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -304,7 +304,7 @@ namespace HiSystems.Interpreter
         }
 
         /// <summary>
-		/// Translates the tokens to a set of operations. Each operation points to two child nodes of type ConstructToken.
+        /// Translates the tokens to a set of operations. Each operation points to two child nodes of type ConstructToken.
         /// For example, 1 + 2 * 3 equates to 2 Operations: 
         ///    Operation1: LeftNode = 1, RightNode = 2. 
         ///    Operation2: LeftNode = 2, RightNode = 3,
@@ -480,106 +480,106 @@ namespace HiSystems.Interpreter
             var functionName = tokensEnum.Current.Value;
 
             if (!(tokensEnum.MoveNext() && tokensEnum.Current.Type == TokenType.LeftParenthesis))
-				throw new InvalidOperationException(String.Format("{0} arguments; first token should be '(' not '{1}'", functionName, tokensEnum.Current.Value));
+                throw new InvalidOperationException(String.Format("{0} arguments; first token should be '(' not '{1}'", functionName, tokensEnum.Current.Value));
             else if (tokensEnum.Current.Type == TokenType.LeftParenthesis && tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.RightParenthesis)
                 // No arguments were specified - empty parentheses were specified
                 tokensEnum.MoveNext();      // consume the left parenthesis token and point it to the right parenthesis token - i.e. the end of the function
             else
             {
-				bool reachedEndOfArguments = false;
+                bool reachedEndOfArguments = false;
 
                 while (!reachedEndOfArguments)
                 {
-					arguments.Add(GetConstructFromTokens(GetFunctionArgumentTokens(functionName, tokensEnum, currentVariables), currentVariables));
+                    arguments.Add(GetConstructFromTokens(GetFunctionArgumentTokens(functionName, tokensEnum, currentVariables), currentVariables));
 
-					// tokensEnum.Current will be the last token processed by GetFunctionArgumentTokens()
-					if (tokensEnum.Current.Type == TokenType.RightParenthesis)
-						reachedEndOfArguments = true;
+                    // tokensEnum.Current will be the last token processed by GetFunctionArgumentTokens()
+                    if (tokensEnum.Current.Type == TokenType.RightParenthesis)
+                        reachedEndOfArguments = true;
                 }
             }
 
             return arguments.ToArray();
         }
 
-		/// <summary>
-		/// Gets the function's next argument's tokens by traversing the tokens until the next , or ) is found (which is not within a function).
-		/// Does not return the , or ) character that terminated the argument expression - it is also consumed.
-		/// </summary>
-		/// <param name="functionName">Only used in order to provide useful exceptions / errors.</param>
-		/// <param name="tokensEnum">Should be pointing to the token that indicates the start of a function argument; either a ( or , character.</param>
+        /// <summary>
+        /// Gets the function's next argument's tokens by traversing the tokens until the next , or ) is found (which is not within a function).
+        /// Does not return the , or ) character that terminated the argument expression - it is also consumed.
+        /// </summary>
+        /// <param name="functionName">Only used in order to provide useful exceptions / errors.</param>
+        /// <param name="tokensEnum">Should be pointing to the token that indicates the start of a function argument; either a ( or , character.</param>
         private static List<Token> GetFunctionArgumentTokens(string functionName, PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
-		{
-			var argumentTokens = new List<Token> ();
+        {
+            var argumentTokens = new List<Token> ();
 
-			int functionDepth = 0;
-			bool reachedEndOfArgument = false;
+            int functionDepth = 0;
+            bool reachedEndOfArgument = false;
 
-			while (!reachedEndOfArgument && tokensEnum.MoveNext()) 
-			{
-				var token = tokensEnum.Current;
+            while (!reachedEndOfArgument && tokensEnum.MoveNext()) 
+            {
+                var token = tokensEnum.Current;
 
-				// found the argument's terminating comma or right parenthesis
-				if (functionDepth == 0 && (token.Type == TokenType.Comma || token.Type == TokenType.RightParenthesis))
-					reachedEndOfArgument = true;
-				else
-				{
-					argumentTokens.Add(token);
+                // found the argument's terminating comma or right parenthesis
+                if (functionDepth == 0 && (token.Type == TokenType.Comma || token.Type == TokenType.RightParenthesis))
+                    reachedEndOfArgument = true;
+                else
+                {
+                    argumentTokens.Add(token);
 
-					if (token.Type == TokenType.LeftParenthesis)
-						functionDepth++;
-					else if (token.Type == TokenType.RightParenthesis)
-						functionDepth--;
-				}
-			}
+                    if (token.Type == TokenType.LeftParenthesis)
+                        functionDepth++;
+                    else if (token.Type == TokenType.RightParenthesis)
+                        functionDepth--;
+                }
+            }
 
-			if (argumentTokens.Count == 0)
-				throw new InvalidOperationException(String.Format("{0} has an empty argument", functionName));
-			else if (!reachedEndOfArgument)
-				throw new InvalidOperationException(String.Format("{0} is missing a terminating argument character; ',' or ')'", functionName));
+            if (argumentTokens.Count == 0)
+                throw new InvalidOperationException(String.Format("{0} has an empty argument", functionName));
+            else if (!reachedEndOfArgument)
+                throw new InvalidOperationException(String.Format("{0} is missing a terminating argument character; ',' or ')'", functionName));
 
-			return argumentTokens;
-		}
+            return argumentTokens;
+        }
 
         /// <summary>
         /// Translates an identifier as either a function, variable name or key word.
         /// A function will match a registered function name and have a left parenthesis token following it, otherwise it is a variable.
         /// </summary>
         private IConstruct TranslateIdentifierToken (PeekableEnumerator<Token> tokensEnum, List<Variable> currentVariables)
-		{
-			var identifierToken = tokensEnum.Current;
+        {
+            var identifierToken = tokensEnum.Current;
 
-			var reservedWordForToken = reservedWords.SingleOrDefault(reserverWord => identifierToken == reserverWord.Word); 
+            var reservedWordForToken = reservedWords.SingleOrDefault(reserverWord => identifierToken == reserverWord.Word); 
 
-			if (reservedWordForToken != null)
-			{
+            if (reservedWordForToken != null)
+            {
                 return reservedWordForToken.Construct;
-			} 
-			else
-			{
-				if (tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.LeftParenthesis)
-				{
-					var functionForToken = allFunctions.SingleOrDefault(aFunction => identifierToken == aFunction.Name);
+            } 
+            else
+            {
+                if (tokensEnum.CanPeek && tokensEnum.Peek.Type == TokenType.LeftParenthesis)
+                {
+                    var functionForToken = allFunctions.SingleOrDefault(aFunction => identifierToken == aFunction.Name);
 
-					if (functionForToken == null)
-						throw new InvalidOperationException(String.Format("Function '{0}' is undefined", identifierToken));
-					else
-						return new FunctionOperation(functionForToken, GetFunctionArguments(tokensEnum, currentVariables));
-				}
-	            else
-	            {
-	                // ensure there is only one Variable instance for the same variable name
-	                var variable = currentVariables.SingleOrDefault(aVariable => identifierToken == aVariable.Name);
+                    if (functionForToken == null)
+                        throw new InvalidOperationException(String.Format("Function '{0}' is undefined", identifierToken));
+                    else
+                        return new FunctionOperation(functionForToken, GetFunctionArguments(tokensEnum, currentVariables));
+                }
+                else
+                {
+                    // ensure there is only one Variable instance for the same variable name
+                    var variable = currentVariables.SingleOrDefault(aVariable => identifierToken == aVariable.Name);
 
-	                if (variable == null)
+                    if (variable == null)
                     {
                         var newVariable = new Variable(tokensEnum.Current.Value);
                         currentVariables.Add(newVariable);
                         return newVariable;
                     }
-	                else
-	                    return variable;
-	            }
-			}
+                    else
+                        return variable;
+                }
+            }
         }
     }
 }

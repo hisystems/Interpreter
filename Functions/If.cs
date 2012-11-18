@@ -12,12 +12,12 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Accepts three arguments:
-	///   argument 1: condition
-	///   argument 2: true result
-	///   argument 3: false result
-	/// </summary>
+    /// <summary>
+    /// Accepts three arguments:
+    ///   argument 1: condition
+    ///   argument 2: true result
+    ///   argument 3: false result
+    /// </summary>
     public class If : Function
     {
         public override string Name
@@ -28,13 +28,13 @@ namespace HiSystems.Interpreter
             }
         }
 
-		public override Literal Execute(IConstruct[] arguments)
+        public override Literal Execute(IConstruct[] arguments)
         {
-			base.EnsureArgumentCountIs(arguments, 3);
+            base.EnsureArgumentCountIs(arguments, 3);
 
-			var condition = base.GetTransformedArgument<Boolean>(arguments, argumentIndex: 0);
+            var condition = base.GetTransformedArgument<Boolean>(arguments, argumentIndex: 0);
 
-			if (condition)
+            if (condition)
                 return base.GetTransformedArgument<Literal>(arguments, argumentIndex: 1);
             else 
                 return base.GetTransformedArgument<Literal>(arguments, argumentIndex: 2);

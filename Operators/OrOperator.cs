@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Logical Or operator.
-	/// </summary>
+    /// <summary>
+    /// Logical Or operator.
+    /// </summary>
     public class OrOperator : Operator
     {
         public OrOperator()

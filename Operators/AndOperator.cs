@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Logical And operator.
-	/// </summary>
+    /// <summary>
+    /// Logical And operator.
+    /// </summary>
     public class AndOperator : Operator
     {
         public AndOperator()

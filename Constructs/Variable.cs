@@ -20,11 +20,11 @@ namespace HiSystems.Interpreter
     {
         private string name;
         private IConstruct construct;
-		
+        
         /// <summary>
         /// </summary>
         public Variable(string name)
-			: this(name, null)
+            : this(name, null)
         {
         }
 
@@ -63,21 +63,21 @@ namespace HiSystems.Interpreter
                 if (value == null)
                     throw new ArgumentNullException();
 
-            	this.construct = value;
+                this.construct = value;
             }
         }
-		
-		Literal IConstruct.Transform()
-		{
-			if (this.construct == null)
-				throw new InvalidOperationException(String.Format("Variable {0} has not been set", this.name));
+        
+        Literal IConstruct.Transform()
+        {
+            if (this.construct == null)
+                throw new InvalidOperationException(String.Format("Variable {0} has not been set", this.name));
 
-			return this.construct.Transform();
-		}
+            return this.construct.Transform();
+        }
 
         public override string ToString()
         {
-			return this.name + ": " + (this.construct == null ? String.Empty : this.construct.ToString());
+            return this.name + ": " + (this.construct == null ? String.Empty : this.construct.ToString());
         }
     }
 }

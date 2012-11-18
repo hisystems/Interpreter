@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Accepts one argument of type Array containing objects of type Number.
-	/// </summary>
+    /// <summary>
+    /// Accepts one argument of type Array containing objects of type Number.
+    /// </summary>
     public class Average : Function
     {
         public override string Name
@@ -25,9 +25,9 @@ namespace HiSystems.Interpreter
             }
         }
 
-		public override Literal Execute(IConstruct[] arguments)
+        public override Literal Execute(IConstruct[] arguments)
         {
-			base.EnsureArgumentCountIs(arguments, 1);
+            base.EnsureArgumentCountIs(arguments, 1);
 
             return new Number(base.GetTransformedArgumentDecimalArray(arguments, argumentIndex:0).Average());
         }

@@ -15,13 +15,13 @@ namespace HiSystems.Interpreter
     internal class PeekableEnumerator<T> : IEnumerator<T>
     {
         private IEnumerator<T> peekingEnumerator;
-		private T current = default(T);
+        private T current = default(T);
         private T peeked;
 
         public PeekableEnumerator(IEnumerable<T> enumerable)
         {
             this.peekingEnumerator = enumerable.GetEnumerator();
-			MoveNextInternal();
+            MoveNextInternal();
         }
 
         public T Current
@@ -64,31 +64,31 @@ namespace HiSystems.Interpreter
 
         public bool MoveNext()
         {
-			this.current = this.peeked;
+            this.current = this.peeked;
 
-			// if reached end of the enumeration
-			if (Object.Equals(this.current, default(T)))
-			    return false;
-		    else
-			{
-				MoveNextInternal();
-			    return true;
-			}
+            // if reached end of the enumeration
+            if (Object.Equals(this.current, default(T)))
+                return false;
+            else
+            {
+                MoveNextInternal();
+                return true;
+            }
         }
 
-		private void MoveNextInternal()
-		{
-			if (this.peekingEnumerator.MoveNext())
-				this.peeked = this.peekingEnumerator.Current;
-			else
-				this.peeked = default(T);
-		}
+        private void MoveNextInternal()
+        {
+            if (this.peekingEnumerator.MoveNext())
+                this.peeked = this.peekingEnumerator.Current;
+            else
+                this.peeked = default(T);
+        }
 
         public void Reset()
         {
             this.peekingEnumerator.Reset();
-			
-			MoveNextInternal();
+            
+            MoveNextInternal();
         }
 
         public void Dispose()

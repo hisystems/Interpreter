@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Divides numeric values.
-	/// </summary>
+    /// <summary>
+    /// Divides numeric values.
+    /// </summary>
     public class DivideOperator : Operator
     {
         public DivideOperator()

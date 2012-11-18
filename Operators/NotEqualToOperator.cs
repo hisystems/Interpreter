@@ -13,11 +13,11 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-	/// Compares two numeric or boolean values.
+    /// Compares two numeric or boolean values.
     /// </summary>
     public class NotEqualToOperator : Operator
     {
-		private EqualToOperator equalToOperator = new EqualToOperator();
+        private EqualToOperator equalToOperator = new EqualToOperator();
 
         public NotEqualToOperator()
         {
@@ -25,7 +25,7 @@ namespace HiSystems.Interpreter
 
         internal override Literal Execute(IConstruct argument1, IConstruct argument2)
         {
-			return !(Boolean)equalToOperator.Execute(argument1, argument2);
+            return !(Boolean)equalToOperator.Execute(argument1, argument2);
         }
 
         public override string Token

@@ -25,19 +25,19 @@ namespace HiSystems.Interpreter
         Identifier,
 
         /// <summary>
-		/// '(' character.
+        /// '(' character.
         /// </summary>
         LeftParenthesis,
 
-		/// <summary>
-		/// ')' character.
-		/// </summary>
-		RightParenthesis,
+        /// <summary>
+        /// ')' character.
+        /// </summary>
+        RightParenthesis,
 
-		/// <summary>
-		/// ',' character.
-		/// </summary>
-		Comma,
+        /// <summary>
+        /// ',' character.
+        /// </summary>
+        Comma,
 
         /// <summary>
         /// String literal, surrounded/delimited by a " character
@@ -54,11 +54,11 @@ namespace HiSystems.Interpreter
         /// </summary>
         DateTime,
 
-		/// <summary>
-		/// Any other token that is not one of the other token types specified in this enum.
-		/// Usually a special character such as '*' or '^'.
-		/// </summary>U
-		Other
+        /// <summary>
+        /// Any other token that is not one of the other token types specified in this enum.
+        /// Usually a special character such as '*' or '^'.
+        /// </summary>U
+        Other
     }
 
     /// <summary>
@@ -99,11 +99,11 @@ namespace HiSystems.Interpreter
         }
 
         internal TokenType Type
-		{
-			get
-			{
-				return this.type;
-			}
+        {
+            get
+            {
+                return this.type;
+            }
         }
 
         public override string ToString()
@@ -139,9 +139,9 @@ namespace HiSystems.Interpreter
                 return token1.value.Equals(token2, StringComparison.InvariantCultureIgnoreCase);
         }
 
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
+        public override int GetHashCode ()
+        {
+            return base.GetHashCode ();
+        }
     }
 }

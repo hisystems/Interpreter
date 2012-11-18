@@ -14,12 +14,12 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Represents an array of constructs. 
-	/// Potentially an array of literals, variables or functions.
+    /// Potentially an array of literals, variables or functions.
     /// </summary>
     public class Array : Literal, IEnumerable<IConstruct>
     {
         private List<IConstruct> items = new List<IConstruct>();
-		
+        
         public Array(decimal[] values)
         {
             items.AddRange(values.Select(item => (Number)item).ToArray());
@@ -29,30 +29,30 @@ namespace HiSystems.Interpreter
         {
             items.AddRange(values);
         }
-		
-		public static implicit operator List<IConstruct>(Array array)
-		{
-			return array.items;
-		}
-		
-		public static implicit operator Array(IConstruct[] constructs)
-		{
-			return new Array(constructs);
-		}
+        
+        public static implicit operator List<IConstruct>(Array array)
+        {
+            return array.items;
+        }
+        
+        public static implicit operator Array(IConstruct[] constructs)
+        {
+            return new Array(constructs);
+        }
 
         public override string ToString()
         {
-			return "Array";
+            return "Array";
         }
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-		{
-			return items.GetEnumerator();
-		}
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+        {
+            return items.GetEnumerator();
+        }
 
-		IEnumerator<IConstruct> IEnumerable<IConstruct>.GetEnumerator ()
-		{
-			return items.GetEnumerator();
-		}
+        IEnumerator<IConstruct> IEnumerable<IConstruct>.GetEnumerator ()
+        {
+            return items.GetEnumerator();
+        }
     }
 }

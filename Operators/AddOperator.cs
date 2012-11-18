@@ -13,7 +13,7 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-	/// Adds two numeric values, text or a date and numeric value (adds days).
+    /// Adds two numeric values, text or a date and numeric value (adds days).
     /// </summary>
     public class AddOperator : Operator
     {

@@ -44,10 +44,10 @@ namespace HiSystems.Interpreter
             this.rightValue = rightValue;
         }
 
-		Literal IConstruct.Transform ()
-		{
-			return this.@operator.Execute(this.leftValue, this.rightValue);
-		}
+        Literal IConstruct.Transform ()
+        {
+            return this.@operator.Execute(this.leftValue, this.rightValue);
+        }
 
         /// <summary>
         /// Represents the relatively ordering precedence for this expression.
@@ -91,8 +91,8 @@ namespace HiSystems.Interpreter
 
             internal set
             {
-				if (value == null)
-					throw new ArgumentNullException();
+                if (value == null)
+                    throw new ArgumentNullException();
 
                 this.leftValue = value;
             }
@@ -129,8 +129,8 @@ namespace HiSystems.Interpreter
 
             internal set
             {
-				if (value == null)
-					throw new ArgumentNullException();
+                if (value == null)
+                    throw new ArgumentNullException();
 
                 this.rightValue = value;
             }
@@ -141,9 +141,9 @@ namespace HiSystems.Interpreter
             return this.leftValue.ToString() + " " + this.@operator.Token + " " + this.rightValue.ToString();
         }
 
-//		/// <summary>
-//		/// Returns all of the items in the expression tree (including this root node).
-//		/// </summary>
+//      /// <summary>
+//      /// Returns all of the items in the expression tree (including this root node).
+//      /// </summary>
 //        public IConstruct[] GetAllItems()
 //        {
 //            var items = new List<IConstruct>();

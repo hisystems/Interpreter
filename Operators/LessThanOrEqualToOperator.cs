@@ -13,7 +13,7 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-	/// Compares two numeric or datetime values.
+    /// Compares two numeric or datetime values.
     /// </summary>
     public class LessThanOrEqualToOperator : Operator
     {

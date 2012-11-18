@@ -28,16 +28,16 @@ namespace HiSystems.Interpreter
         {
             return value.ToString();
         }
-		
-		public static implicit operator bool(Boolean boolean)
-		{
-			return boolean.value;
-		}
-		
-		public static implicit operator Boolean(bool value)
-		{
-			return new Boolean(value);
-		}
+        
+        public static implicit operator bool(Boolean boolean)
+        {
+            return boolean.value;
+        }
+        
+        public static implicit operator Boolean(bool value)
+        {
+            return new Boolean(value);
+        }
 
         public static Boolean operator==(Boolean value1, Boolean value2)
         {
@@ -79,13 +79,13 @@ namespace HiSystems.Interpreter
             return base.GetHashCode();
         }
 
-		public override bool Equals (object obj)
-		{
-			if (obj == null || !(obj is Boolean))
-				return false;
-			else 
-				return AreEqual(this, (Boolean)obj);
-		}
+        public override bool Equals (object obj)
+        {
+            if (obj == null || !(obj is Boolean))
+                return false;
+            else 
+                return AreEqual(this, (Boolean)obj);
+        }
 
         private static Boolean AreEqual(Boolean value1, Boolean value2)
         {

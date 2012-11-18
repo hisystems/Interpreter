@@ -21,37 +21,37 @@ namespace HiSystems.Interpreter
         /// </summary>
         public static List<Token> Parse(string expression)
         {
-			const char LeftParenthesis = '(';
-			const char RightParenthesis = ')';
-			const char Comma = ',';
-			const char NumericNegative = '-';
+            const char LeftParenthesis = '(';
+            const char RightParenthesis = ')';
+            const char Comma = ',';
+            const char NumericNegative = '-';
             const char DateTimeDelimiter = '#';
 
             var whitespaceCharacters = new[] { ' ', '\t' };
             var numericCharacters = new[] { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             var identifierCharacters = new[] { '_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
             var identifierSecondaryCharacters = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };     // other characters that can be used as identifiers - but cannot be a starting character
-			var textDelimiters = new[] { '\"', '\'' };
-			bool isNumericNegative = false;
+            var textDelimiters = new[] { '\"', '\'' };
+            bool isNumericNegative = false;
             bool parsingText = false;
             bool parsingDateTime = false;
 
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
             var currentToken = String.Empty;
-			char currentTextDelimiter = '\0';
+            char currentTextDelimiter = '\0';
             var characterTokenType = TokenType.Other;
-			var expressionEnumerator = new PeekableEnumerator<char>(expression);
+            var expressionEnumerator = new PeekableEnumerator<char>(expression);
             var characterString = String.Empty;
 
             while (expressionEnumerator.MoveNext())
             {
                 var tokenIsSeparateCharacter = false;
-				var character = expressionEnumerator.Current;
+                var character = expressionEnumerator.Current;
 
-				// if the character is a '-' and the subsequent character is a numeric character then this is a negative number. 
-				// otherwise it is some other character TokenType.Other -- probably a subtraction operator.
-				isNumericNegative = character == NumericNegative && expressionEnumerator.CanPeek && numericCharacters.Contains(expressionEnumerator.Peek);
+                // if the character is a '-' and the subsequent character is a numeric character then this is a negative number. 
+                // otherwise it is some other character TokenType.Other -- probably a subtraction operator.
+                isNumericNegative = character == NumericNegative && expressionEnumerator.CanPeek && numericCharacters.Contains(expressionEnumerator.Peek);
 
                 if (textDelimiters.Contains(character) || parsingText)
                 {
@@ -59,7 +59,7 @@ namespace HiSystems.Interpreter
                     {
                         characterTokenType = TokenType.Text;
                         characterString = String.Empty;         // consume character
-						currentTextDelimiter = character;
+                        currentTextDelimiter = character;
                         parsingText = true;
                     }
                     else if (character == currentTextDelimiter && parsingText)     // finished parsing
@@ -119,7 +119,7 @@ namespace HiSystems.Interpreter
                     characterString = character.ToString();
                     tokenIsSeparateCharacter = true;
                 }
-				else
+                else
                 {
                     characterTokenType = TokenType.Other;
                     characterString = character.ToString();

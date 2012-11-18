@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Subtract one numeric value from another or the number of days from a datetime value, or the difference between two dates.
-	/// </summary>
+    /// <summary>
+    /// Subtract one numeric value from another or the number of days from a datetime value, or the difference between two dates.
+    /// </summary>
     public class SubtractOperator : Operator
     {
         public SubtractOperator()

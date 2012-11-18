@@ -12,9 +12,9 @@ using System.Text;
 
 namespace HiSystems.Interpreter
 {
-	/// <summary>
-	/// Compares two numeric values.
-	/// </summary>
+    /// <summary>
+    /// Compares two numeric values.
+    /// </summary>
     public class MultiplyOperator : Operator
     {
         public MultiplyOperator()

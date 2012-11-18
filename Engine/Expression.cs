@@ -30,35 +30,35 @@ namespace HiSystems.Interpreter
         /// <summary>
         /// All of the variables defined in the expression.
         /// </summary>
-		private IDictionary<string, Variable> variables;
+        private IDictionary<string, Variable> variables;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="HiSystems.Interpreter.Expression"/> class.
-		/// </summary>
-		/// <param name='value'>
-		/// Root construct in the expression tree. Calling IConstruct.Transform will return the actual value.
-		/// </param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HiSystems.Interpreter.Expression"/> class.
+        /// </summary>
+        /// <param name='value'>
+        /// Root construct in the expression tree. Calling IConstruct.Transform will return the actual value.
+        /// </param>
         internal Expression(string originalExpression, IConstruct value, List<Variable> variables)
         {
-			if (value == null)
-				throw new ArgumentNullException();
+            if (value == null)
+                throw new ArgumentNullException();
             else if (String.IsNullOrEmpty(originalExpression))
                 throw new ArgumentNullException();
                 
-			this.construct = value;
+            this.construct = value;
             this.expression = originalExpression;
             this.variables = TranslateVariabelsToDictionary(variables);
         }
 
-		/// <summary>
-		/// Returns the calculated value for the expression.
-		/// Any variables should be set before calling this function.
-		/// Will typically return a Number or Boolean literal value (depending on the type of expression).
-		/// </summary>
-		public Literal Execute()
-		{
-			return construct.Transform();
-		}
+        /// <summary>
+        /// Returns the calculated value for the expression.
+        /// Any variables should be set before calling this function.
+        /// Will typically return a Number or Boolean literal value (depending on the type of expression).
+        /// </summary>
+        public Literal Execute()
+        {
+            return construct.Transform();
+        }
 
         /// <summary>
         /// Returns the calculated value for the expression.
@@ -67,7 +67,7 @@ namespace HiSystems.Interpreter
         /// </summary>
         public T Execute<T>() where T : Literal
         {
-			Literal result = this.Execute();
+            Literal result = this.Execute();
 
             if (!(result is T))
                 throw new InvalidCastException(String.Format("Return value from '{0}' is of type {1}, not of type {2}", this.expression, result.GetType().Name, typeof(T).Name));
@@ -75,19 +75,19 @@ namespace HiSystems.Interpreter
             return (T)result;
         }
 
-		/// <summary>
-		/// Returns a dictionary containing all of the variables that were defined in the expression.
-		/// If a variable is defined in multiple locations only one variable object is available in the dictionary.
-		/// Variables are tokens/identifiers that could not be resolved to an operator or function name.
-		/// Each variable should be assigned a value i.e: Variables["MyVariable"].Literal = (Number)1;
-		/// </summary>
-		public IDictionary<string, Variable> Variables 
-		{
-			get 
-			{
-				return this.variables;
-			}
-		}
+        /// <summary>
+        /// Returns a dictionary containing all of the variables that were defined in the expression.
+        /// If a variable is defined in multiple locations only one variable object is available in the dictionary.
+        /// Variables are tokens/identifiers that could not be resolved to an operator or function name.
+        /// Each variable should be assigned a value i.e: Variables["MyVariable"].Literal = (Number)1;
+        /// </summary>
+        public IDictionary<string, Variable> Variables 
+        {
+            get 
+            {
+                return this.variables;
+            }
+        }
 
         /// <summary>
         /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
