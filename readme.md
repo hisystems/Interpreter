@@ -80,7 +80,7 @@ decimal result = Engine.Parse("NEGATE(1)").Execute();
 * IF(condition, trueResult, falseResult)
 * Array(item1, item2, ...) 
 * Format(value [, format])  -- Formats a number or date/time
-* 
+* Len(text) -- returns the length of a string
 * Custom functions can be created by extending Function and registered it via `Engine.Register(Function)`
 
 ### Supported data types (can be extended)
@@ -110,6 +110,9 @@ decimal result = Engine.Parse("NEGATE(1)").Execute();
 * Today:
   - Returns the date component (no time component) for today.
   - Example: Today() + 1  -- returns the date for tomorrow
+* Len(text)
+  - Returns the length of a string
+  - Example: Len('abc') -- returns 3
 
 ### Supported Operations (can be extended)
 * +		- addition  (numbers, date/time + number, string concatenation)
