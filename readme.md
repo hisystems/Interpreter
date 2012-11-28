@@ -99,6 +99,8 @@ decimal result = Engine.Parse("NEGATE(1)").Execute();
 * Date/Time 
   - Surrounded by '#' characters
   - Example: #2000-01-30 12:30:03# 
+  
+### Supported functions (can be extended)
 * If(condition, trueResult, falseResult)
   - Example: If(1 > 2, 10, 20)
 * Max(array)
