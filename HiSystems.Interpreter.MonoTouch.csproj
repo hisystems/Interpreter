@@ -90,7 +90,7 @@
     <MonoDevelop>
       <Properties>
         <Policies>
-          <TextStylePolicy TabsToSpaces="False" EolMarker="Windows" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+          <TextStylePolicy EolMarker="Windows" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
         </Policies>
       </Properties>
     </MonoDevelop>
