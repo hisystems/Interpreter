@@ -36,6 +36,17 @@ namespace HiSystems.Interpreter
             return new Text(value1.value + value2.value);
         }
 
+		/// <summary>
+		/// Returns the length of the text.
+		/// </summary>
+		public int Length
+		{
+			get
+			{
+				return this.value.Length;
+			}
+		}
+
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Text))
