@@ -39,13 +39,13 @@ namespace HiSystems.Interpreter
 		/// <summary>
 		/// Returns the length of the text.
 		/// </summary>
-		public int Length
-		{
-			get
-			{
-				return this.value.Length;
-			}
-		}
+        public int Length
+        {
+            get
+            {
+                return this.value.Length;
+            }
+        }
 
         public override bool Equals(object obj)
         {
