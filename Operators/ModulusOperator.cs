@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Returns the modulus from two numeric values.
+    /// Usage: numericValue % numericValue
+    /// Example: 1 % 2
     /// </summary>
     public class ModulusOperator : Operator
     {

@@ -98,7 +98,7 @@ namespace HiSystems.Interpreter
         }
         
         /// <summary>
-        /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
+        /// Converts a bool value to an Expression that when Execute()'d will return the same bool literal value.
         /// </summary>
         public static implicit operator Expression(bool value)
         {

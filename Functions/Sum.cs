@@ -13,7 +13,9 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Accepts one argument of type Array containing objects of type Number.
+    /// Returns the sum total of the numeric values from an array.
+    /// Usage: Sum(array)
+    /// Example: Sum(Array(1, 2, 3))
     /// </summary>
     public class Sum : Function
     {

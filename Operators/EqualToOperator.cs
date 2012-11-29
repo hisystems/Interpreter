@@ -14,6 +14,16 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Compares two numeric, text, boolean or datetime values.
+    /// Usage: 
+    ///   numericValue = numericValue
+    ///   booleanValue = booleanValue
+    ///   text = text
+    ///   dateTime = dateTime
+    /// Examples:
+    ///   1 = 2
+    ///   true = false
+    ///   'a' = 'b'
+    ///   #2000-1-1# = #2000-1-2#
     /// </summary>
     public class EqualToOperator : Operator
     {

@@ -13,7 +13,15 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Subtract one numeric value from another or the number of days from a datetime value, or the difference between two dates.
+    /// Subtracts one numeric value from another or the number of days from a datetime value, or the difference between two dates.
+    /// Usage: 
+    ///   numericValue - numericValue
+    ///   dateTime - numericDays
+    ///   dateTime - dateTime
+    /// Examples:
+    ///   1 - 2
+    ///   #2000-01-01# - 1
+    ///   #2000-01-02# - #2000-01-01# 
     /// </summary>
     public class SubtractOperator : Operator
     {

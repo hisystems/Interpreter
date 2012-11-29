@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Logical Or operator.
+    /// Usage: booleanValue OR booleanValue
+    /// Example: true OR false
     /// </summary>
     public class OrOperator : Operator
     {

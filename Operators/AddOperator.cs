@@ -14,6 +14,14 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Adds two numeric values, text or a date and numeric value (adds days).
+    /// Usage: 
+    ///   numericValue + numericValue
+    ///   dateTime + numericDays
+    ///   text + textToConcatenate
+    /// Examples:
+    ///   1 + 2
+    ///   #2000-01-01# + 1
+    ///   'ab' + 'c'
     /// </summary>
     public class AddOperator : Operator
     {

@@ -14,6 +14,12 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Compares two numeric or datetime values.
+    /// Usage: 
+    ///   numericValue &lt; numericValue
+    ///   dateTime &lt; dateTime
+    /// Examples:
+    ///   1 &lt; 2
+    ///   #2000-01-02# &lt; #2000-01-01#
     /// </summary>
     public class LessThanOperator : Operator
     {

@@ -14,7 +14,6 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Represents a variable value that is resolved when first accessed.
-    /// The value is also cached to improve further calls.
     /// </summary>
     public class Variable : IConstruct
     {

@@ -14,6 +14,7 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Returns today's date.
+    /// Usage: Today()
     /// </summary>
     public class Today : Function
     {

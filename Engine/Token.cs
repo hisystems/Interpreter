@@ -20,7 +20,7 @@ namespace HiSystems.Interpreter
         Number,
 
         /// <summary>
-        /// Function variable name or reserved word
+        /// Function, variable name or reserved word
         /// </summary>
         Identifier,
 
@@ -57,7 +57,7 @@ namespace HiSystems.Interpreter
         /// <summary>
         /// Any other token that is not one of the other token types specified in this enum.
         /// Usually a special character such as '*' or '^'.
-        /// </summary>U
+        /// </summary>
         Other
     }
 

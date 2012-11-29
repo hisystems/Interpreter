@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Accepts one argument of type Array containing objects of type Number.
+    /// Usage: AVG(array)
+    /// Example: Avg(Array(1, 2, 3))
     /// </summary>
     public class Average : Function
     {

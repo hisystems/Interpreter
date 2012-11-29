@@ -13,10 +13,9 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Accepts three arguments:
-    ///   argument 1: condition
-    ///   argument 2: true result
-    ///   argument 3: false result
+    /// Based on the condition / expression returns the true or false result.
+    /// Usage: If(condition, trueResult, falseResult)
+    /// Example: If(1 = 1, 'Yes', 'No') 
     /// </summary>
     public class If : Function
     {

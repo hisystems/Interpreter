@@ -13,7 +13,17 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Compares two numeric or boolean values.
+    /// Compares two numeric, text, boolean or datetime values.
+    /// Usage: 
+    ///   numericValue &lt;&gt; numericValue
+    ///   booleanValue &lt;&gt; booleanValue
+    ///   text &lt;&gt; text
+    ///   dateTime = dateTime
+    /// Examples:
+    ///   1 &lt;&gt; 2
+    ///   true &lt;&gt; false
+    ///   'a' &lt;&gt; 'b'
+    ///   #2000-1-1# &lt;&gt; #2000-1-2#
     /// </summary>
     public class NotEqualToOperator : Operator
     {

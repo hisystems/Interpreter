@@ -13,7 +13,9 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
+    /// Returns the minimum numeric value from an array.
     /// Usage: Min(array)
+    /// Example: Min(Array(1, 2, 3))
     /// </summary>
     public class Min : Function
     {

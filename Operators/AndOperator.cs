@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Logical And operator.
+    /// Usage: booleanValue AND booleanValue
+    /// Example: true AND false
     /// </summary>
     public class AndOperator : Operator
     {

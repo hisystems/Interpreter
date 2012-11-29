@@ -13,7 +13,9 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Compares two numeric values.
+    /// Multiplies two numeric values.
+    /// Usage: numericValue * numericValue
+    /// Example: 1 * 2
     /// </summary>
     public class MultiplyOperator : Operator
     {

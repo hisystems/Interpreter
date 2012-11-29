@@ -13,7 +13,9 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
+    /// Returns the maximum numeric value from an array.
     /// Usage: Max(array)
+    /// Example: Max(Array(1, 2, 3))
     /// </summary>
     public class Max : Function
     {

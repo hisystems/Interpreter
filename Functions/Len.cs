@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Accepts one argument of type string for which the length is returned.
+    /// Usage: Len(text)
+    /// Example: Len('abc')
     /// </summary>
     public class Len : Function
     {

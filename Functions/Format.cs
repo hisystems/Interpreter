@@ -13,9 +13,10 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Usage: Format(value [, format])
     /// The format for numeric values utilises the standard or custom numeric string formats.
     /// If format is omitted then the value is converted to the most appropriate string representation.
+    /// Usage: Format(value [, format])
+    /// Example: Format(1, '0.0')
     /// </summary>
     public class Format : Function
     {

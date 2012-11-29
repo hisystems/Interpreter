@@ -14,6 +14,8 @@ namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Divides numeric values.
+    /// Usage: numericValue / numericValue
+    /// Example: 1 / 2
     /// </summary>
     public class DivideOperator : Operator
     {
