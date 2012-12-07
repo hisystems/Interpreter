@@ -21,57 +21,59 @@ decimal result = new Engine().Parse("IF(1 < 2, 10, 20)").Execute<Number>();
 
 3. Custom functions can provide support for accessing data from a database:
 ```csharp
-class GetMyDataFunction : Function
-{
-	public override string Name 
-	{
-		get 
-		{
-			return "GETMYDATA"; 
-		}
-	}
+    class GetMyDataFunction : Function
+    {
+    	public override string Name 
+    	{
+    		get 
+    		{
+    			return "GETMYDATA"; 
+    		}
+    	}
 
-	public override Literal Execute(IConstruct[] arguments)
-	{
-		base.EnsureArgumentCountIs(arguments, 2);
+    	public override Literal Execute(IConstruct[] arguments)
+    	{
+    		base.EnsureArgumentCountIs(arguments, 2);
 	
-		var tableName = base.GetTransformedArgument<Text>(arguments, 0);
-		var fieldName = base.GetTransformedArgument<Text>(arguments, 1);
+    		var tableName = base.GetTransformedArgument<Text>(arguments, 0);
+	    	var fieldName = base.GetTransformedArgument<Text>(arguments, 1);
 
-		// Retrieve data using tableName and fieldName and return Array<Number>.
-		// This return value can then be used by any functions that accept Array<Number> as an argument such as SUM().
-		// return new Array(new decimal[] { 1, 2, 3, 4 });
-	}
-}
-var engine = new Engine();
-engine.Register(new GetMyDataFunction());	
-decimal result = Engine.Parse("SUM(GETMYDATA('MyTable', 'MyField'))").Execute<Number>();
+    		// Retrieve data using tableName and fieldName and return Array<Number>.
+    		// This return value can then be used by any functions that accept Array<Number> as an argument such as SUM().
+    		// return new Array(new decimal[] { 1, 2, 3, 4 });
+    	}
+    }
+    
+    var engine = new Engine();
+    engine.Register(new GetMyDataFunction());	
+    decimal result = Engine.Parse("SUM(GETMYDATA('MyTable', 'MyField'))").Execute<Number>();
 ```
 
 4. Custom functions that manipulate values:
 ```csharp
-class NegateNumber : Function
-{
-    public override string Name 
+    class NegateNumber : Function
     {
-        get 
+        public override string Name 
         {
-	        return "NEGATE"; 
+            get 
+            {
+	            return "NEGATE"; 
+            }
+        }
+
+        public override Literal Execute(IConstruct[] arguments)
+        {
+            base.EnsureArgumentCountIs(arguments, 1);
+
+    		decimal inputValue = base.GetTransformedArgument<Number>(arguments, argumentIndex: 0);
+
+            return new Number(-inputValue);
         }
     }
-
-    public override Literal Execute(IConstruct[] arguments)
-    {
-        base.EnsureArgumentCountIs(arguments, 1);
-
-		decimal inputValue = base.GetTransformedArgument<Number>(arguments, argumentIndex: 0);
-
-        return new Number(-inputValue);
-    }
-}
-var engine = new Engine();
-engine.Register(new NegateNumber());
-decimal result = Engine.Parse("NEGATE(1)").Execute<Number>();
+    
+    var engine = new Engine();
+    engine.Register(new NegateNumber());
+    decimal result = Engine.Parse("NEGATE(1)").Execute<Number>();
 ```
 
 5. Working with numbers:
