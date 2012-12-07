@@ -99,6 +99,17 @@ var expression = new Engine().Parse("1 < 2 AND (2 > 3 OR 3 < 4)");
 bool result = expression.Execute<Boolean>();
 ```
 
+9. Executing multiple expressions:
+```csharp
+var expression1 = Engine.Parse("A + 2");
+expression1.Variables["A"].Value = (Number)1;
+
+var expression2 = Engine.Parse("Expression1 + 3");
+expression2.Variables["Expression1"].Value = expression1;
+
+decimal result = expression2.Execute<Number>();
+```
+
 ### Supported Functions 
 * SUM(array)
 * AVG(array)
