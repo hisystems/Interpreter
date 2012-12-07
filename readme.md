@@ -101,13 +101,15 @@ bool result = expression.Execute<Boolean>();
 
 9. Executing multiple expressions:
 ```csharp
-var expression1 = Engine.Parse("A + 2");
-expression1.Variables["A"].Value = (Number)1;
+ var engine = new Engine();
 
-var expression2 = Engine.Parse("Expression1 + 3");
-expression2.Variables["Expression1"].Value = expression1;
+ var expression1 = engine.Parse("A + 2");
+ expression1.Variables["A"].Value = (Number)1;
 
-decimal result = expression2.Execute<Number>();
+ var expression2 = engine.Parse("Expression1 + 3");
+ expression2.Variables["Expression1"].Value = expression1;
+
+ decimal result = expression2.Execute<Number>();
 ```
 
 ### Supported Functions 
