@@ -78,6 +78,7 @@
     <Compile Include="Functions\Min.cs" />
     <Compile Include="Functions\Len.cs" />
     <Compile Include="Engine\ExpressionParsed.cs" />
+    <Compile Include="Engine\ExpressionParseOnDemand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />

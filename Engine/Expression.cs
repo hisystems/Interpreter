@@ -68,6 +68,17 @@ namespace HiSystems.Interpreter
         public abstract IDictionary<string, Variable> Variables { get; }
 
         /// <summary>
+        /// The original / source expression which this expression represents.
+        /// </summary>
+        protected string Source
+        {
+            get
+            {
+                return this.expression;
+            }
+        }
+
+        /// <summary>
         /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
         /// </summary>
         public static implicit operator Expression(string stringLiteral)

@@ -207,6 +207,17 @@ namespace HiSystems.Interpreter
         }
 
         /// <summary>
+        /// Returns an expression that is not compiled, thereby deferring parsing/compilation into the future and decreasing load time.
+        /// The expression is compiled on demand / just-in-time on the first call to Expression.Execute() or Expression.Variables.
+        /// Any syntax errors with the expression will NOT be thrown from this function, only on the first call to Execute() or Variables. 
+        /// Usage of the returned Expression is identical to an Expression returned from Engine.Parse().
+        /// </summary>
+        public Expression ParseOnDemand(string expression)
+        {
+            return new ExpressionParseOnDemand(ParseToConstruct, expression);
+        }
+
+        /// <summary>
         /// Parses the expression and prepares it for execution.
         /// </summary>
         private IConstruct ParseToConstruct(string expression, List<Variable> currentVariables)
