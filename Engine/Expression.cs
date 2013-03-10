@@ -13,24 +13,15 @@ using System.Text;
 namespace HiSystems.Interpreter
 {
     /// <summary>
-    /// Contains a parsed expression tree object and variables defined in the expression.
+    /// Represents an expression and the variables defined in the expression.
+    /// This is the base class for an already compiled expression or a just-in-time compiled expression.
     /// </summary>
-    public class Expression : IConstruct
+    public abstract class Expression : IConstruct
     {
         /// <summary>
-        /// Only used for error reporting.
+        /// Only used for error reporting and debugging as the ToString return value.
         /// </summary>
         private string expression;
-
-        /// <summary>
-        /// The root construct of the expression tree.
-        /// </summary>
-        private IConstruct construct;
-
-        /// <summary>
-        /// All of the variables defined in the expression.
-        /// </summary>
-        private IDictionary<string, Variable> variables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HiSystems.Interpreter.Expression"/> class.
@@ -38,16 +29,12 @@ namespace HiSystems.Interpreter
         /// <param name='value'>
         /// Root construct in the expression tree. Calling IConstruct.Transform will return the actual value.
         /// </param>
-        internal Expression(string originalExpression, IConstruct value, List<Variable> variables)
+        internal Expression(string expression)
         {
-            if (value == null)
-                throw new ArgumentNullException();
-            else if (String.IsNullOrEmpty(originalExpression))
+            if (String.IsNullOrEmpty(expression))
                 throw new ArgumentNullException();
                 
-            this.construct = value;
-            this.expression = originalExpression;
-            this.variables = TranslateVariabelsToDictionary(variables);
+            this.expression = expression;
         }
 
         /// <summary>
@@ -55,10 +42,7 @@ namespace HiSystems.Interpreter
         /// Any variables should be set before calling this function.
         /// Will typically return a Number or Boolean literal value (depending on the type of expression).
         /// </summary>
-        public Literal Execute()
-        {
-            return construct.Transform();
-        }
+        public abstract Literal Execute();
 
         /// <summary>
         /// Returns the calculated value for the expression.
@@ -81,20 +65,14 @@ namespace HiSystems.Interpreter
         /// Variables are tokens/identifiers that could not be resolved to an operator or function name.
         /// Each variable should be assigned a value i.e: Variables["MyVariable"].Literal = (Number)1;
         /// </summary>
-        public IDictionary<string, Variable> Variables 
-        {
-            get 
-            {
-                return this.variables;
-            }
-        }
+        public abstract IDictionary<string, Variable> Variables { get; }
 
         /// <summary>
         /// Converts a string value to an Expression that when Execute()'d will return the same Text literal value.
         /// </summary>
         public static implicit operator Expression(string stringLiteral)
         {
-            return new Expression("\"" + stringLiteral + "\"", new Text(stringLiteral), new List<Variable>());
+            return new ExpressionParsed("\"" + stringLiteral + "\"", new Text(stringLiteral), new List<Variable>());
         }
         
         /// <summary>
@@ -102,19 +80,24 @@ namespace HiSystems.Interpreter
         /// </summary>
         public static implicit operator Expression(bool value)
         {
-            return new Expression(value.ToString(), new Boolean(value), new List<Variable>());
+            return new ExpressionParsed(value.ToString(), new Boolean(value), new List<Variable>());
         }
 
         /// Returns a distinct list of variables from the expression.
         /// </summary>
-        private static IDictionary<string, Variable> TranslateVariabelsToDictionary(List<Variable> variables)
+        protected static IDictionary<string, Variable> TranslateVariablesToDictionary(List<Variable> variables)
         {
             return variables.ToDictionary(variable => variable.Name, variable => variable);
         }
 
+        /// <summary>
+        /// Allows for an expression to also be considered as a construct.
+        /// Used when an expression references an identifier which is also a separate expression.
+        /// Allowing an expression to reference a chain of expressions.
+        /// </summary>
         Literal IConstruct.Transform()
         {
-            return construct.Transform();
+            return this.Execute();
         }
 
         public override string ToString()

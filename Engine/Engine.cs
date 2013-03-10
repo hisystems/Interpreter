@@ -203,7 +203,7 @@ namespace HiSystems.Interpreter
         {
             var variablesList = new List<Variable>();
             
-            return new Expression(expression, ParseToConstruct(expression, variablesList), variablesList);
+            return new ExpressionParsed(expression, ParseToConstruct(expression, variablesList), variablesList);
         }
 
         /// <summary>
