@@ -55,6 +55,7 @@
     <Compile Include="Functions\Format.cs" />
     <Compile Include="Functions\Function.cs" />
     <Compile Include="Functions\If.cs" />
+    <Compile Include="Functions\Len.cs" />
     <Compile Include="Functions\Max.cs" />
     <Compile Include="Functions\Min.cs" />
     <Compile Include="Functions\Sum.cs" />
