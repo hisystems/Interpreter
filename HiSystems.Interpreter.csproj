@@ -46,6 +46,7 @@
     <Compile Include="Constructs\Variable.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\Expression.cs" />
+    <Compile Include="Engine\ExpressionParsed.cs" />
     <Compile Include="Engine\Token.cs" />
     <Compile Include="Engine\Tokenizer.cs" />
     <Compile Include="Functions\ArrayFunction.cs" />
