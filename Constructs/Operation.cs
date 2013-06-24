@@ -111,7 +111,7 @@ namespace HiSystems.Interpreter
         }
 
         /// <summary>
-        /// The left-hand-side value that the operation will use.
+        /// The operator that will be executed when this operation is executed.
         /// </summary>
         public Operator Operator
         {
