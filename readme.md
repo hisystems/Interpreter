@@ -1,9 +1,13 @@
-﻿Interpreter
+Interpreter
 ===========
 
 Overview
 --------
 The Interpreter is an expression interpreter written in pure C#. It parses any mathematical or logical expression and returns a result. The return result depends on the return type of the last function / operation. An expression can contain variables that can be supplied before the expression is executed and the result returned. 
+
+Video Tutorial
+--------------
+The video overview and tutorial is available here: http://youtu.be/D9UGHPQpKP4
 
 ### Examples:
 1. Passing a variable to the expression. The example below parses the expression and creates the expression tree via Engine.Parse(). The variables are then supplied to the expression and the expression executed via Execute().
