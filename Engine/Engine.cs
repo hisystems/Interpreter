@@ -211,6 +211,7 @@ namespace HiSystems.Interpreter
         /// Parses the expression and prepares it for execution.
         /// The returned Expression can then be populated with variables if necessary
         /// and then executed via Expression.Execute().
+        /// </summary>
         public Expression Parse(string expression)
         {
             var variablesList = new List<Variable>();
