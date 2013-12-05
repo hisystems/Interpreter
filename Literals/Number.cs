@@ -18,15 +18,16 @@
  ___________________________________________________ */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Text;
+using HiSystems.Interpreter.Converters;
 
 namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Represents an immutable numeric value.
     /// </summary>
+    [TypeConverter(typeof(NumberTypeConverter))]
     public class Number : Literal
     {
         private decimal value;
