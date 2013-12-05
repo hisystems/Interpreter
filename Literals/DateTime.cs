@@ -19,14 +19,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using HiSystems.Interpreter.Converters;
 
 namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Represents an immutable date / time value.
     /// </summary>
+    [TypeConverter(typeof(DateTimeTypeConverter))]
     public class DateTime : Literal
     {
         private System.DateTime value;

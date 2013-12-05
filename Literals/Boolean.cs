@@ -17,16 +17,18 @@
   limitations under the License.
  ___________________________________________________ */
 
-using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using HiSystems.Interpreter.Converters;
 
 namespace HiSystems.Interpreter
 {
     /// <summary>
     /// Represents an immutable boolean value.
     /// </summary>
+    [TypeConverter(typeof(BooleanTypeConverter))]
     public class Boolean : Literal
     {
         private bool value;

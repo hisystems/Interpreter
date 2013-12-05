@@ -134,7 +134,7 @@ namespace HiSystems.Interpreter
         private T CastArgumentToType<T>(IConstruct argument, int argumentIndex)
         {
             if (!(argument is T))
-                throw new InvalidOperationException(String.Format("{0} argument {1} is not of type {2} and cannot be used with the {3} function", argument.ToString(), argumentIndex + 1, typeof(T).Name, this.Name));
+                throw new InvalidOperationException(String.Format("argument {1}{0} is not of type {2} and cannot be used with the {3} function", argument.ToString(), argumentIndex + 1, typeof(T).Name, this.Name));
 
             return (T)argument;
         }
