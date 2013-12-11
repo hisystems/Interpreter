@@ -18,9 +18,12 @@
  ___________________________________________________ */
 
 using System;
+using System.ComponentModel;
+using HiSystems.Interpreter.Converters;
 
 namespace HiSystems.Interpreter
 {
+    [TypeConverter(typeof(TextTypeConverter))]
     public class Text : Literal
     {
         private string value;
