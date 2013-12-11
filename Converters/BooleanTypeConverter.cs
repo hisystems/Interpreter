@@ -8,12 +8,12 @@ namespace HiSystems.Interpreter.Converters
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof (bool);
+            return sourceType == typeof(bool);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return destinationType == typeof (Boolean) || destinationType == typeof(Literal);
+            return destinationType == typeof(Boolean) || destinationType == typeof(Literal);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
@@ -25,7 +25,7 @@ namespace HiSystems.Interpreter.Converters
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             var boolean = (bool)value;
-            return  (Boolean)boolean;
+            return (Boolean)boolean;
         }
     }
 }

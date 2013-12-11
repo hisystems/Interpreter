@@ -8,7 +8,7 @@ namespace HiSystems.Interpreter.Converters
 {
     public class NumberTypeConverter : TypeConverter
     {
-        private readonly IEnumerable<Type> _supportedTypes = new[] {typeof (int), typeof (double), typeof (decimal), typeof (Literal)};
+        private readonly IEnumerable<Type> _supportedTypes = new[] {typeof(int), typeof(double), typeof(decimal), typeof(Literal)};
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
@@ -31,12 +31,14 @@ namespace HiSystems.Interpreter.Converters
 
             if (destinationType == typeof(int))
             {
-                return number == null ? default(int) : (int) (decimal) number;
+                return number == null ? default(int) : (int)(decimal)number;
             }
+
             if (destinationType == typeof(decimal))
             {
                 return number == null ? default(decimal) : (decimal)number;
             }
+
             return number == null ? default(double) : (double)number;
         }
     }

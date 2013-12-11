@@ -8,7 +8,7 @@ namespace HiSystems.Interpreter.Converters
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof (string);
+            return sourceType == typeof(string);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
