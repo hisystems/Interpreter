@@ -79,11 +79,16 @@
     <Compile Include="Functions\Len.cs" />
     <Compile Include="Engine\ExpressionParsed.cs" />
     <Compile Include="Engine\ExpressionParseOnDemand.cs" />
+    <Compile Include="Converters\BooleanTypeConverter.cs" />
+    <Compile Include="Converters\DateTimeTypeConverter.cs" />
+    <Compile Include="Converters\NumberTypeConverter.cs" />
+    <Compile Include="Converters\TextTypeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />
     <Folder Include="Library\" />
     <Folder Include="Literals\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" />
