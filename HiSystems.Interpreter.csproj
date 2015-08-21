@@ -48,6 +48,7 @@
     <Compile Include="Converters\DateTimeTypeConverter.cs" />
     <Compile Include="Converters\NumberTypeConverter.cs" />
     <Compile Include="Converters\TextTypeConverter.cs" />
+    <Compile Include="Converters\TimeSpanTypeConverter.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\Expression.cs" />
     <Compile Include="Engine\ExpressionParsed.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Literals\Literal.cs" />
     <Compile Include="Literals\Number.cs" />
     <Compile Include="Literals\Text.cs" />
+    <Compile Include="Literals\TimeSpan.cs" />
     <Compile Include="Operators\AddOperator.cs" />
     <Compile Include="Operators\AndOperator.cs" />
     <Compile Include="Operators\DivideOperator.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Operators\Operator.cs" />
     <Compile Include="Operators\OrOperator.cs" />
     <Compile Include="Operators\SubtractOperator.cs" />
+    <Compile Include="Operators\XorOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

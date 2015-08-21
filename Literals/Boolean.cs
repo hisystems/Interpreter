@@ -73,6 +73,10 @@ namespace HiSystems.Interpreter
             return value1.value | value2.value;
         }
 
+		public static Boolean operator ^(Boolean value1, Boolean value2)
+		{
+			return value1.value ^ value2.value;
+		}
         public static Boolean operator!(Boolean value)
         {
             return new Boolean(!value.value);

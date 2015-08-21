@@ -66,6 +66,10 @@ namespace HiSystems.Interpreter
         /// </summary>
         DateTime,
 
+		/// <summary>
+		/// Value is surrounded by ` characters.
+		/// </summary>
+		TimeSpan,
         /// <summary>
         /// Any other token that is not one of the other token types specified in this enum.
         /// Usually a special character such as '*' or '^'.

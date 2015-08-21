@@ -69,19 +69,19 @@ namespace HiSystems.Interpreter
             return !AreEqual(value1, value2);
         }
 
-        public static DateTime operator+(DateTime date, Number days)
+        public static DateTime operator+(DateTime date, TimeSpan timeSpan)
         {
-            return new DateTime(date.value.AddDays((double)days));
+            return new DateTime(date.value.Add(timeSpan));
         }
         
-        public static DateTime operator-(DateTime date, Number days)
+		public static DateTime operator-(DateTime date, TimeSpan timeSpan)
         {
-            return new DateTime(date.value.AddDays(-(double)days));
+			return new DateTime(date.value.Subtract(timeSpan));
         }
         
-        public static Number operator-(DateTime date1, DateTime date2)
+		public static TimeSpan operator-(DateTime date1, DateTime date2)
         {
-            return new Number(Convert.ToDecimal((date1.value - date2.value).TotalDays));
+            return new TimeSpan(date1.value - date2.value);
         }
 
         public static Boolean operator>(DateTime value1, DateTime value2)

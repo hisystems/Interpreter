@@ -157,6 +157,7 @@ namespace HiSystems.Interpreter
             new OperatorAndPrecedence() { Operation = new EqualToOperator(), Precedence = 3 },
             new OperatorAndPrecedence() { Operation = new NotEqualToOperator(), Precedence = 3 },
             new OperatorAndPrecedence() { Operation = new AndOperator(), Precedence = 2 },
+			new OperatorAndPrecedence() { Operation = new XorOperator(), Precedence = 2 },
             new OperatorAndPrecedence() { Operation = new OrOperator(), Precedence = 1 }
         };
 
@@ -309,6 +310,9 @@ namespace HiSystems.Interpreter
                     case TokenType.DateTime:
                         translatedTokens.Add(new ConstructToken(new DateTime(System.DateTime.Parse(token.Value))));
                         break;
+					case TokenType.TimeSpan:
+						translatedTokens.Add(new ConstructToken(new TimeSpan(System.TimeSpan.Parse(token.Value))));
+						break;
                     case TokenType.Other:
                         var operationForToken = allOperators
                             .Select(item => item.Operation)

@@ -38,6 +38,7 @@ namespace HiSystems.Interpreter
             const char Comma = ',';
             const char NumericNegative = '-';
             const char DateTimeDelimiter = '#';
+	        const char TimeSpanDelimiter = '`';
 
             var whitespaceCharacters = new[] { ' ', '\t' };
             var numericCharacters = new[] { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -47,6 +48,7 @@ namespace HiSystems.Interpreter
             bool isNumericNegative = false;
             bool parsingText = false;
             bool parsingDateTime = false;
+	        bool parsingTimeSpan = false;
 
             var tokens = new List<Token>();
             var currentTokenType = TokenType.Other;
@@ -98,6 +100,22 @@ namespace HiSystems.Interpreter
                     else 
                         characterString = character.ToString();
                 }
+				else if (character == TimeSpanDelimiter || parsingTimeSpan)
+				{
+					if (!parsingTimeSpan)                       // started parsing
+					{
+						characterTokenType = TokenType.TimeSpan;
+						characterString = String.Empty;     // consume character
+						parsingTimeSpan = true;
+					}
+					else if (character == TimeSpanDelimiter)    // finished parsing
+					{
+						characterString = String.Empty;     // consume character
+						parsingTimeSpan = false;
+					}
+					else
+						characterString = character.ToString();
+				}
                 else if (whitespaceCharacters.Contains(character))
                 {
                     characterTokenType = TokenType.Whitespace;
