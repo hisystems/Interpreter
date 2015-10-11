@@ -48,8 +48,10 @@ namespace HiSystems.Interpreter
                 return ((Number)argument1Transformed) >= ((Number)argument2Transformed);
             else if (argument1Transformed is DateTime && argument2Transformed is DateTime)
                 return ((DateTime)argument1Transformed) >= ((DateTime)argument2Transformed);
+			else if (argument1Transformed is TimeSpan && argument2Transformed is TimeSpan)
+				return ((TimeSpan)argument1Transformed) >= ((TimeSpan)argument2Transformed);
             else
-                throw new InvalidOperationException(String.Format("Greater than or equal to operator requires arguments of type Number or DateTime. Argument types are {0} {1}.", argument1Transformed.GetType().Name, argument2Transformed.GetType().Name));
+                throw new InvalidOperationException(String.Format("Greater than or equal to operator requires arguments of type Number, TimeSpan or DateTime. Argument types are {0} {1}.", argument1Transformed.GetType().Name, argument2Transformed.GetType().Name));
         }
 
         public override string Token
